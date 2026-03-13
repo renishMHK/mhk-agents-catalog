@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHK Agents Marketplace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ── LIGHT THEME (default, Confluence-friendly) ── */
+:root {
+  --bg: #F7F7F5;
+  --surface: #FFFFFF;
+  --card: #FFFFFF;
+  --card-hover: #FAFAF8;
+  --border: #E2E0DC;
+  --border-subtle: #ECEAE6;
+  --text: #1A1A2E;
+  --text-secondary: #5C5C6D;
+  --text-dim: #9C9CA8;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.1), 0 2px 6px rgba(0,0,0,0.04);
+  --pill-active-text: #FFFFFF;
+  --usage-bg: #F2F1EE;
+  --grain-opacity: 0.015;
+  --glow-opacity: 0;
+
+  --plan: #7C3AED;
+  --build: #D97706;
+  --test: #059669;
+  --ship: #2563EB;
+  --ops: #DC2626;
+  --security: #0891B2;
+  --integrate: #C026D3;
+
+  --plan-bg: rgba(124,58,237,0.07);
+  --build-bg: rgba(217,119,6,0.07);
+  --test-bg: rgba(5,150,105,0.07);
+  --ship-bg: rgba(37,99,235,0.07);
+  --ops-bg: rgba(220,38,38,0.07);
+  --security-bg: rgba(8,145,178,0.07);
+  --integrate-bg: rgba(192,38,211,0.07);
+
+  --radius: 10px;
+  --font: 'Bricolage Grotesque', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ── DARK THEME ── */
+[data-theme="dark"] {
+  --bg: #0C0D11;
+  --surface: #141519;
+  --card: #1A1B21;
+  --card-hover: #1F2028;
+  --border: #2A2B33;
+  --border-subtle: #1F2028;
+  --text: #EEEAE4;
+  --text-secondary: #9B97A0;
+  --text-dim: #5E5B63;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.5);
+  --pill-active-text: #0C0D11;
+  --usage-bg: #0C0D11;
+  --grain-opacity: 0.025;
+  --glow-opacity: 1;
+
+  --plan: #A78BFA;
+  --build: #FB923C;
+  --test: #34D399;
+  --ship: #60A5FA;
+  --ops: #F87171;
+  --security: #22D3EE;
+  --integrate: #F0ABFC;
+
+  --plan-bg: rgba(167,139,250,0.1);
+  --build-bg: rgba(251,146,60,0.1);
+  --test-bg: rgba(52,211,153,0.1);
+  --ship-bg: rgba(96,165,250,0.1);
+  --ops-bg: rgba(248,113,113,0.1);
+  --security-bg: rgba(34,211,238,0.1);
+  --integrate-bg: rgba(240,171,252,0.1);
+}
+
+html { font-size: 15px; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Grain texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* Ambient glow (dark mode only) */
+body::after {
+  content: '';
+  position: fixed;
+  top: -40%; left: 50%; transform: translateX(-50%);
+  width: 900px; height: 600px;
+  background: radial-gradient(ellipse, rgba(167,139,250,0.06) 0%, rgba(96,165,250,0.03) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--glow-opacity);
+  transition: opacity 0.3s ease;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.4rem 2rem 3rem;
+}
+
+/* ── HEADER ── */
+.header { margin-bottom: 2rem; }
+
+.header-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 1.6rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+
+.title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+.title span {
+  display: block;
+  font-size: 0.52em;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 0.2rem;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 0.3rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-bottom: 0.3rem;
+  transition: border-color 0.2s;
+}
+
+.theme-toggle:hover { border-color: var(--border); }
+
+.theme-btn {
+  font-family: var(--font);
+  font-size: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  color: var(--text-dim);
+}
+
+.theme-btn.active {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.theme-btn svg { width: 14px; height: 14px; }
+
+.stats {
+  display: flex;
+  gap: 1.8rem;
+  flex-shrink: 0;
+  padding-bottom: 0.3rem;
+}
+
+.stat { text-align: right; }
+
+.stat-value {
+  font-family: var(--mono);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin-top: 0.1rem;
+}
+
+/* ── CONTROLS ── */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.8rem;
+}
+
+.search-wrap {
+  position: relative;
+  flex: 0 1 320px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px; top: 50%;
+  transform: translateY(-50%);
+  width: 16px; height: 16px;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+.search {
+  width: 100%;
+  font-family: var(--font);
+  font-size: 0.87rem;
+  padding: 0.55rem 0.8rem 0.55rem 2.3rem;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search::placeholder { color: var(--text-dim); }
+
+.search:focus {
+  border-color: var(--plan);
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.08);
+}
+
+[data-theme="dark"] .search:focus {
+  box-shadow: 0 0 0 3px rgba(167,139,250,0.08);
+}
+
+.filters {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.filter-pill {
+  font-family: var(--font);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.38rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.filter-pill:hover {
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.filter-pill.active {
+  color: var(--pill-active-text);
+  font-weight: 600;
+}
+
+.filter-pill[data-stage="all"].active { background: var(--text-secondary); border-color: var(--text-secondary); }
+.filter-pill[data-stage="plan"].active { background: var(--plan); border-color: var(--plan); }
+.filter-pill[data-stage="build"].active { background: var(--build); border-color: var(--build); }
+.filter-pill[data-stage="test"].active { background: var(--test); border-color: var(--test); }
+.filter-pill[data-stage="ship"].active { background: var(--ship); border-color: var(--ship); }
+.filter-pill[data-stage="ops"].active { background: var(--ops); border-color: var(--ops); }
+.filter-pill[data-stage="security"].active { background: var(--security); border-color: var(--security); }
+.filter-pill[data-stage="integrate"].active { background: var(--integrate); border-color: var(--integrate); }
+
+.result-count {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-left: auto;
+  white-space: nowrap;
+  font-family: var(--mono);
+}
+
+/* ── GRID ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 0.75rem;
+}
+
+/* ── CARD ── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.3rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.25s ease, background 0.2s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  animation: cardIn 0.4s ease both;
+  box-shadow: var(--shadow-sm);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  border-radius: 3px 0 0 3px;
+}
+
+.card[data-stage="plan"]::before { background: var(--plan); }
+.card[data-stage="build"]::before { background: var(--build); }
+.card[data-stage="test"]::before { background: var(--test); }
+.card[data-stage="ship"]::before { background: var(--ship); }
+.card[data-stage="ops"]::before { background: var(--ops); }
+.card[data-stage="security"]::before { background: var(--security); }
+.card[data-stage="integrate"]::before { background: var(--integrate); }
+
+.card:hover {
+  border-color: var(--border);
+  background: var(--card-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card.expanded {
+  grid-column: 1 / -1;
+  transform: none;
+  background: var(--card-hover);
+  border-color: var(--border);
+  box-shadow: var(--shadow-md);
+}
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.card-identity { min-width: 0; }
+
+.card-name {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  transition: color 0.2s;
+}
+
+.card[data-stage="plan"] .card-name { color: var(--plan); }
+.card[data-stage="build"] .card-name { color: var(--build); }
+.card[data-stage="test"] .card-name { color: var(--test); }
+.card[data-stage="ship"] .card-name { color: var(--ship); }
+.card[data-stage="ops"] .card-name { color: var(--ops); }
+.card[data-stage="security"] .card-name { color: var(--security); }
+.card[data-stage="integrate"] .card-name { color: var(--integrate); }
+
+.card-fullname {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-top: 0.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-meta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.version-badge {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  padding: 0.18rem 0.5rem;
+  border-radius: 6px;
+  background: var(--bg);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.stage-tag {
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.18rem 0.5rem;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.stage-tag[data-s="plan"] { color: var(--plan); background: var(--plan-bg); }
+.stage-tag[data-s="build"] { color: var(--build); background: var(--build-bg); }
+.stage-tag[data-s="test"] { color: var(--test); background: var(--test-bg); }
+.stage-tag[data-s="ship"] { color: var(--ship); background: var(--ship-bg); }
+.stage-tag[data-s="ops"] { color: var(--ops); background: var(--ops-bg); }
+.stage-tag[data-s="security"] { color: var(--security); background: var(--security-bg); }
+.stage-tag[data-s="integrate"] { color: var(--integrate); background: var(--integrate-bg); }
+
+.card-desc {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin-top: 0.7rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card.expanded .card-desc { -webkit-line-clamp: unset; }
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.75rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.card-creator { font-size: 0.72rem; color: var(--text-dim); }
+
+.card-expand-hint {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  transition: color 0.2s;
+}
+
+.card:hover .card-expand-hint { color: var(--text-secondary); }
+.card.expanded .card-expand-hint { display: none; }
+
+/* ── EXPANDED DETAILS ── */
+.card-details {
+  display: none;
+  margin-top: 1.1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.card.expanded .card-details {
+  display: block;
+  animation: detailsIn 0.35s ease both;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.3rem;
+}
+
+.detail-section h4 {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  margin-bottom: 0.6rem;
+  font-weight: 500;
+}
+
+.features-list { list-style: none; }
+
+.features-list li {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  padding: 0.25rem 0 0.25rem 1.2rem;
+  position: relative;
+}
+
+.features-list li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.6rem;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+}
+
+.card[data-stage="plan"] .features-list li::before { background: var(--plan); opacity: 0.6; }
+.card[data-stage="build"] .features-list li::before { background: var(--build); opacity: 0.6; }
+.card[data-stage="test"] .features-list li::before { background: var(--test); opacity: 0.6; }
+.card[data-stage="ship"] .features-list li::before { background: var(--ship); opacity: 0.6; }
+.card[data-stage="ops"] .features-list li::before { background: var(--ops); opacity: 0.6; }
+.card[data-stage="security"] .features-list li::before { background: var(--security); opacity: 0.6; }
+.card[data-stage="integrate"] .features-list li::before { background: var(--integrate); opacity: 0.6; }
+
+.usage-block {
+  background: var(--usage-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+}
+
+.usage-block code {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.73rem;
+  color: var(--text-dim);
+}
+
+.detail-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.detail-meta-item strong {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.detail-meta-item svg {
+  width: 13px; height: 13px;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-dim);
+  grid-column: 1 / -1;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes detailsIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  .header-top { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .header-left { flex-direction: row; align-items: center; }
+  .stats { align-self: flex-start; }
+  .controls { flex-direction: column; align-items: stretch; }
+  .search-wrap { flex: 1 1 auto; }
+  .filters { justify-content: flex-start; }
+  .result-count { margin-left: 0; }
+  .grid { grid-template-columns: 1fr; }
+  .details-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 1.5rem 1rem 2rem; }
+  .title { font-size: 1.6rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header class="header">
+    <div class="header-top">
+      <div class="header-left">
+        <h1 class="title">
+          <span>MHK Engineering</span>
+          Agents Marketplace
+        </h1>
+        <div class="theme-toggle" id="themeToggle" role="radiogroup" aria-label="Color theme">
+          <button class="theme-btn active" id="btnLight" aria-label="Light mode" title="Light mode">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </button>
+          <button class="theme-btn" id="btnDark" aria-label="Dark mode" title="Dark mode">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="stats" id="stats"></div>
+    </div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" class="search" id="searchInput" placeholder="Search agents..." autocomplete="off" spellcheck="false">
+      </div>
+      <div class="filters" id="filters"></div>
+      <div class="result-count" id="resultCount"></div>
+    </div>
+  </header>
+  <main class="grid" id="grid"></main>
+</div>
+
+<script>
+const STAGES = {
+  plan: { label: 'Plan' },
+  build: { label: 'Build' },
+  test: { label: 'Test' },
+  ship: { label: 'Ship' },
+  ops: { label: 'Ops' },
+  security: { label: 'Security' },
+  integrate: { label: 'Integrate' }
+};
+
+const AGENTS = [
+  { name:"PRISM", full_name:"Planning & Refinement with Intelligent Systems at MHK", version:"10.0.1", stage:"plan", owner:"Renish Madhukar", contribution:"-", last_updated:"2026-03-13", description:"Analyzes Jira tickets, grooms requirements, creates detailed implementation plans with code changes, and optionally generates 50-100+ comprehensive test cases. Uses SCOUT MCP for 95% faster codebase analysis.", key_features:["Fetches and analyzes Jira ticket details with SCOUT MCP (1-2 min vs 30-60 min)","Asks clarifying questions to groom and refine requirements","Generates comprehensive implementation plans with specific code changes","Adaptive RLM-based analysis: simple/medium/complex routing","Creates detailed test cases (50-100+)","Phase gate enforcement for structured planning workflow"], usage:["/prism CPDEV-12345","plan CPDEV-12345"] },
+  { name:"SCORE", full_name:"Swift Calculation of Operational Resource Effort", version:"3.0.0", stage:"plan", owner:"Renish Madhukar", contribution:"-", last_updated:"2026-03-04", description:"Estimates story points for Jira tickets using 4,100+ historical stories and the Fibonacci scale (1, 2, 3, 5, 8, 13, 21).", key_features:["Analyzes ticket complexity using 4,100+ historical stories","Uses Fibonacci scale estimation (1, 2, 3, 5, 8, 13, 21)","Considers technical requirements and domain context","Provides detailed reasoning for estimates","Compares against similar historical tickets"], usage:["/score CPDEV-12345","estimate story points for CPDEV-12345"] },
+  { name:"SLATE", full_name:"Structured Level-of-effort Assessment and Time Estimation", version:"1.0.0", stage:"plan", owner:"Narendhar Maaroju", contribution:"Narendhar Maaroju", last_updated:"2026-03-10", description:"Produces AI-augmented LOE estimates in direct hours with 3-point confidence bands. Reads PRISM plan signals, replaces T-shirt sizing with a transparent, reproducible formula.", key_features:["Extracts P1\u2013P7 signals from PRISM implementation plans","Calculates 6 explicit testing phases (JUnit, Selenium, manual, functional, regression, test data)","Code review effort formula (R1\u2013R4) with Architecture Review support","Retrofit/backport scope (B1\u2013B3) from Jira Fix Versions","3-point estimate: optimistic / most likely / conservative","Full formula transparency \u2014 shows every calculation step"], usage:["/slate CPDEV-12345","LOE CPDEV-12345"] },
+  { name:"MACH", full_name:"MHK Automated Code Helper", version:"4.0.3", stage:"build", owner:"Renish Madhukar", contribution:"Dasaradhi Jetti, Gerald Hoxha", last_updated:"2026-03-13", description:"Executes implementation plans created by PRISM. Fetches the plan from Jira, validates against implementation guidelines, and implements code changes step by step.", key_features:["Fetches PRISM plans from Jira comments","Creates git backup branches before changes","Implements code changes sequentially with validation","Validates each step before proceeding","Runs tests to verify changes"], usage:["/mach CPDEV-12345","implement CPDEV-12345"] },
+  { name:"ARM", full_name:"Automated Retrofit at MHK", version:"3.0.0", stage:"build", owner:"Renish Madhukar", contribution:"Dasaradhi Jetti", last_updated:"2026-03-12", description:"Ports code changes from the current branch to target branches based on Jira Fix Versions. Supports backporting and forward-porting with AI-assisted conflict resolution.", key_features:["Cherry-picks commits to target branches based on Jira Fix Versions","AI-assisted merge conflict resolution","Guidelines validation and build verification","Creates PRs for ported changes","Tracks porting status across branches"], usage:["/arm CPDEV-12345","retrofit CPDEV-12345"] },
+  { name:"QUEST", full_name:"Quality Unified Evaluation & System Testing", version:"2.0.3", stage:"test", owner:"Renish Madhukar", contribution:"Dasaradhi Jetti", last_updated:"2026-03-13", description:"Validates code implementations through comprehensive QA testing. Runs functional tests, validates code coverage (80% threshold), executes PRISM test plans, and generates detailed QA reports.", key_features:["Validates requirements from Jira against implementation","Runs functional tests with 80% code coverage threshold","Executes PRISM-generated test cases","Checks QA guardrails for compliance","Generates comprehensive QA reports"], usage:["/quest CPDEV-12345","run tests for CPDEV-12345"] },
+  { name:"GUARD", full_name:"Git-Aware Unified Analysis for Review & Diffs", version:"1.0.1", stage:"test", owner:"Dasaradhi Jetti", contribution:"-", last_updated:"2026-02-27", description:"Reviews MR/PRs against Jira requirements, implementation plans, and project rules. Posts comprehensive review decisions with APPROVED/DENIED verdict.", key_features:["Fetches MR/PR details from GitLab/GitHub","Extracts Jira ticket context and requirements","Finds or generates implementation plans via PRISM","Compares implementation against requirements","Loads project coding standards for rule enforcement","Posts comprehensive review decisions with APPROVED/DENIED verdict"], usage:["/guard https://gitlab.com/org/repo/-/merge_requests/123","review MR 123 against CPDEV-12345"] },
+  { name:"PUSH", full_name:"Pipeline Unified Submission Handler", version:"1.1.2", stage:"ship", owner:"Renish Madhukar", contribution:"-", last_updated:"2026-03-04", description:"Handles code submission after QUEST validates the implementation. Runs quality gates, commits with Jira ID enforcement, pushes to remote, and auto-creates Pull Requests or Merge Requests.", key_features:["Runs quality gates (lint, formatting, SonarQube)","Creates commits with Jira ID enforcement","Pushes to remote repository","Auto-creates PR/MR with proper descriptions","Posts PR links to Jira ticket"], usage:["/push CPDEV-12345","push changes for CPDEV-12345"] },
+  { name:"SURGE", full_name:"Site-reliability Unified Response & Guided Engineering", version:"2.3.0", stage:"ops", owner:"Keith Rodgers", contribution:"Keith Rodgers", last_updated:"2026-03-13", description:"Site reliability agent that classifies JIRA issues by type, then routes investigation across 10 domains including CloudWatch, RDS, X-Ray traces, VPC networking, and more.", key_features:["Classifies JIRA issues by type and routes to relevant investigation domains","11 dedicated investigation skills: /get-logs, /get-traces, /get-db-queries, and more","Queries CloudWatch Logs Insights across core, portal, ws, interop, and job applications","Captures and analyzes Java thread dumps for deadlocks and contention","Verifies network connectivity and inspects AWS infrastructure routing paths","Comprehensive health checks with HEALTHY/DEGRADED/UNHEALTHY assessment"], usage:["/surge CPDEV-12345","/surge investigate app failure on UAT1"] },
+  { name:"PIPE", full_name:"Pipeline Investigation & Problem Engine", version:"1.2.0", stage:"ops", owner:"Keith Rodgers", contribution:"Keith Rodgers", last_updated:"2026-03-13", description:"Debugs CI/CD pipeline failures across GitHub Actions and Jenkins. Diagnoses build failures, YAML/Groovy syntax issues, runner/agent problems, and dependency resolution.", key_features:["Diagnoses GitHub Actions workflow failures with YAML validation","Troubleshoots Jenkins pipeline errors (CPS, credentials, shared libs)","Analyzes build logs to identify root cause vs cascading failures","Auto-discovers Jenkins credentials from MCP, env vars, or Claude settings","Provides fix recommendations with prevention guidance"], usage:["/pipe debug GitHub Actions failure","/pipe Jenkins build 456 failing"] },
+  { name:"PROBE", full_name:"Problem Resolution & Outcome-Based Evaluation", version:"1.2.0", stage:"ops", owner:"Randy Leung", contribution:"-", last_updated:"2026-02-27", description:"Performs structured Root Cause Analysis on incidents in Jira. Conducts interactive 5 Whys analysis, classifies root cause ownership, and generates corrective and preventive actions.", key_features:["Fetches Jira incident details: description, comments, linked tickets, timeline","Similar past incident search (always performed)","Interactive 5 Whys analysis: minimum 3, standard 5, maximum 8 levels","Root cause ownership classification: Internal / Client / Vendor / Third Party / Environmental","Impact assessment: duration, users affected, business impact, SLA breach","Corrective and preventive action generation with Jira posting"], usage:["/probe SEN-123","probe INC-12345"] },
+  { name:"DISPATCH", full_name:"Directed Intelligent System for Planning, Action, and Task Coordination", version:"1.1.0", stage:"ops", owner:"Keith Rodgers", contribution:"Keith Rodgers", last_updated:"2026-03-13", description:"Operations orchestrator that discovers available tools and Jenkins pipelines, creates step-by-step execution plans, and guides ops engineers through each action with approval gates.", key_features:["Plans and executes operational tasks with step-by-step user approval gates","Hybrid capability discovery: static catalog + dynamic Jenkins job/skill search","Leverages 22 devops-skills and 26 Jenkins MCP tools","Deep networking expertise: TCP/IP, DNS, routing, firewalls, TLS, VPC","Traditional systems analysis: process management, memory, disk I/O, kernel tuning","6-phase workflow: Intake > Discovery > Planning > Execution > Verification > Reporting"], usage:["/dispatch CPDEV-12345","/dispatch deploy build to UAT"] },
+  { name:"SHIELD", full_name:"Security Hardening & Intelligent Evaluation of Library Dependencies", version:"1.3.0", stage:"security", owner:"Renish Madhukar", contribution:"-", last_updated:"2026-02-27", description:"Analyzes vulnerability reports, enriches with CISA KEV and NVD data, identifies actively exploited CVEs, and generates phased remediation plans for Java dependencies.", key_features:["Parses CSV exports from vulnerability scanners (Wiz, Snyk, etc.)","Cross-references CVEs with CISA KEV (actively exploited)","Identifies EOL libraries and breaking changes","Generates phased remediation plans (Critical > High > Medium > Low)","Audits client Maven dependencies via GitHub and OSS Index","Validates upgrade paths against Maven Central and Spring Boot BOM"], usage:["/shield analyze vulnerabilities.csv","/shield check log4j 1.2.16"] },
+  { name:"SENTINEL", full_name:"SEN Ticket Integrity & Language Evaluation", version:"1.2.0", stage:"security", owner:"Randy Leung", contribution:"-", last_updated:"2026-03-10", description:"Reviews SEN tickets for RCA completeness, 5 Whys attachment, corrective action tracking, and client-facing language quality. Produces structured pass/fail checklist reports.", key_features:["Fetches SEN ticket data: all RCA custom fields, attachments, issue links","Reviews RCA tab completeness: verifies all required fields are populated","5 Whys attachment verification with content parsing","Corrective action review with linked ticket validation","Language quality scan for jargon, speculation, blame, and PHI","Structured pass/fail/warning checklist report"], usage:["sentinel SEN-367","/sentinel SEN-218"] },
+  { name:"DELTA", full_name:"Data Exploration & Learning for Trend Analysis", version:"1.0.0", stage:"integrate", owner:"Sowmya Nukala", contribution:"-", last_updated:"2026-02-17", description:"Automates the end-to-end workflow from JIRA tickets to production-ready database artifacts and analytics dashboards with 95% time reduction in STTM creation.", key_features:["End-to-end data workflow: JIRA > STTM > SQL > Redshift > QuickSight","STTM (Source-to-Target Mapping) generation with 95% time reduction","SQL creation: materialized views + reporting views","Redshift deployment with validation","QuickSight dashboard, analysis, and dataset creation","Healthcare domain expertise (HIPAA, UM, Appeals, DER, FHIR)"], usage:["/delta CPDEV-12345","/delta CPDEV-12345 --sttm-only"] },
+  { name:"atlassian-fetch", full_name:"Atlassian Data Fetch & Create Agent", version:"1.7.0", stage:"integrate", owner:"Renish Madhukar", contribution:"-", last_updated:"2026-03-09", description:"Fetches data from Jira (tickets, search, comments) and Confluence (pages, search). Creates and updates Confluence pages from markdown.", key_features:["Fetch Jira tickets, comments, and search results","Batch fetch multiple tickets in a single API call","Fetch Confluence pages and children","Create and update Confluence pages from markdown","Create blog posts from markdown","Search across Jira and Confluence"], usage:["/atlassian-fetch ticket CPDEV-12345","/atlassian-fetch page 12345"] }
+];
+
+// ── Safe DOM helpers ──
+function el(tag, attrs, children) {
+  const e = document.createElement(tag);
+  if (attrs) {
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === 'className') e.className = v;
+      else if (k === 'textContent') e.textContent = v;
+      else if (k.startsWith('data-') || k.startsWith('data_')) e.setAttribute(k.replace(/_/g, '-'), v);
+      else if (k === 'style' && typeof v === 'string') e.style.cssText = v;
+      else if (k === 'onclick') e.addEventListener('click', v);
+      else e.setAttribute(k, v);
+    }
+  }
+  if (children) {
+    for (const c of (Array.isArray(children) ? children : [children])) {
+      if (typeof c === 'string') e.appendChild(document.createTextNode(c));
+      else if (c) e.appendChild(c);
+    }
+  }
+  return e;
+}
+
+// ── Theme toggle ──
+function setTheme(theme) {
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+  document.getElementById('btnLight').classList.toggle('active', theme === 'light');
+  document.getElementById('btnDark').classList.toggle('active', theme === 'dark');
+  try { localStorage.setItem('mhk-catalog-theme', theme); } catch (e) {}
+}
+
+document.getElementById('btnLight').addEventListener('click', () => setTheme('light'));
+document.getElementById('btnDark').addEventListener('click', () => setTheme('dark'));
+
+// Detect saved or system preference
+(function initTheme() {
+  try {
+    const saved = localStorage.getItem('mhk-catalog-theme');
+    if (saved) { setTheme(saved); return; }
+  } catch (e) {}
+  // Default to light for Confluence compatibility
+  setTheme('light');
+})();
+
+// ── Build UI ──
+function buildStats() {
+  const statsEl = document.getElementById('stats');
+  const owners = new Set(AGENTS.map(a => a.owner));
+  const contribs = new Set(AGENTS.flatMap(a => a.contribution && a.contribution !== '-' ? a.contribution.split(',').map(s => s.trim()) : []));
+  const allPeople = new Set([...owners, ...contribs]);
+
+  [[AGENTS.length, 'Agents'], [allPeople.size, 'Contributors'], [Object.keys(STAGES).length, 'Stages']].forEach(([val, label]) => {
+    statsEl.appendChild(el('div', { className: 'stat' }, [
+      el('div', { className: 'stat-value', textContent: String(val) }),
+      el('div', { className: 'stat-label', textContent: label })
+    ]));
+  });
+}
+
+function buildFilters() {
+  const filtersEl = document.getElementById('filters');
+  const counts = {};
+  AGENTS.forEach(a => { counts[a.stage] = (counts[a.stage] || 0) + 1; });
+
+  filtersEl.appendChild(el('button', {
+    className: 'filter-pill active',
+    'data-stage': 'all',
+    textContent: 'All ' + AGENTS.length,
+    onclick: () => setFilter('all')
+  }));
+
+  for (const [key, info] of Object.entries(STAGES)) {
+    if (counts[key]) {
+      filtersEl.appendChild(el('button', {
+        className: 'filter-pill',
+        'data-stage': key,
+        textContent: info.label + ' ' + counts[key],
+        onclick: () => setFilter(key)
+      }));
+    }
+  }
+}
+
+function buildCard(agent, index) {
+  const stageInfo = STAGES[agent.stage] || { label: agent.stage };
+
+  const featureItems = agent.key_features.map(f => el('li', { textContent: f }));
+
+  const codeEl = el('code', {});
+  agent.usage.forEach((u, i) => {
+    codeEl.appendChild(el('span', { textContent: u }));
+    if (i < agent.usage.length - 1) codeEl.appendChild(document.createElement('br'));
+  });
+
+  // Detail meta items
+  function metaItem(svgPath, label, value) {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('fill', 'none');
+    svg.setAttribute('stroke', 'currentColor');
+    svg.setAttribute('stroke-width', '2');
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', svgPath);
+    svg.appendChild(path);
+    return el('div', { className: 'detail-meta-item' }, [
+      svg,
+      document.createTextNode(label + ' '),
+      el('strong', { textContent: value })
+    ]);
+  }
+
+  const metaItems = [];
+  if (agent.last_updated) {
+    metaItems.push(metaItem('M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z', 'Updated', agent.last_updated));
+  }
+
+  const detailMeta = el('div', { className: 'detail-meta' }, metaItems);
+
+  return el('article', {
+    className: 'card',
+    'data-stage': agent.stage,
+    'data-name': agent.name,
+    style: 'animation-delay:' + (index * 0.04) + 's',
+    onclick: function() { toggleCard(this); }
+  }, [
+    el('div', { className: 'card-head' }, [
+      el('div', { className: 'card-identity' }, [
+        el('div', { className: 'card-name', textContent: agent.name }),
+        el('div', { className: 'card-fullname', textContent: agent.full_name })
+      ]),
+      el('div', { className: 'card-meta' }, [
+        el('span', { className: 'stage-tag', 'data-s': agent.stage, textContent: stageInfo.label }),
+        el('span', { className: 'version-badge', textContent: 'v' + agent.version })
+      ])
+    ]),
+    el('p', { className: 'card-desc', textContent: agent.description }),
+    el('div', { className: 'card-footer' }, [
+      el('span', { className: 'card-creator', textContent: agent.owner }),
+      el('span', { className: 'card-expand-hint', textContent: 'details \u2192' })
+    ]),
+    el('div', { className: 'card-details' }, [
+      el('div', { className: 'details-grid' }, [
+        el('div', { className: 'detail-section' }, [
+          el('h4', { textContent: 'Key Features' }),
+          el('ul', { className: 'features-list' }, featureItems)
+        ]),
+        el('div', { className: 'detail-section' }, [
+          el('h4', { textContent: 'Usage' }),
+          el('div', { className: 'usage-block' }, [codeEl])
+        ])
+      ]),
+      detailMeta
+    ])
+  ]);
+}
+
+function renderCards(agents) {
+  const grid = document.getElementById('grid');
+  grid.replaceChildren();
+
+  if (agents.length === 0) {
+    grid.appendChild(el('div', { className: 'empty-state' }, [
+      el('p', { textContent: 'No agents match your search.' })
+    ]));
+    return;
+  }
+
+  agents.forEach((a, i) => grid.appendChild(buildCard(a, i)));
+}
+
+// ── Interactions ──
+let activeFilter = 'all';
+let searchQuery = '';
+
+function setFilter(stage) {
+  activeFilter = stage;
+  document.querySelectorAll('.filter-pill').forEach(p => {
+    p.classList.toggle('active', p.dataset.stage === stage);
+  });
+  applyFilters();
+}
+
+function applyFilters() {
+  const q = searchQuery.toLowerCase();
+  const filtered = AGENTS.filter(a => {
+    const matchStage = activeFilter === 'all' || a.stage === activeFilter;
+    const matchSearch = !q
+      || a.name.toLowerCase().includes(q)
+      || a.full_name.toLowerCase().includes(q)
+      || a.description.toLowerCase().includes(q)
+      || a.owner.toLowerCase().includes(q)
+      || a.key_features.some(f => f.toLowerCase().includes(q));
+    return matchStage && matchSearch;
+  });
+
+  renderCards(filtered);
+
+  const rc = document.getElementById('resultCount');
+  rc.textContent = (q || activeFilter !== 'all')
+    ? filtered.length + ' of ' + AGENTS.length
+    : '';
+}
+
+function toggleCard(cardEl) {
+  const wasExpanded = cardEl.classList.contains('expanded');
+  document.querySelectorAll('.card.expanded').forEach(c => c.classList.remove('expanded'));
+  if (!wasExpanded) {
+    cardEl.classList.add('expanded');
+    setTimeout(() => cardEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+  }
+}
+
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchQuery = e.target.value.trim();
+  applyFilters();
+});
+
+// ── Init ──
+buildStats();
+buildFilters();
+renderCards(AGENTS);
+</script>
+</body>
+</html>
