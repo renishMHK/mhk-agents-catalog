@@ -9,80 +9,80 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-/* ── LIGHT THEME (default, Confluence-friendly) ── */
+/* ── LIGHT THEME (Atlassian Design System) ── */
 :root {
-  --bg: #F7F7F5;
-  --surface: #FFFFFF;
+  --bg: #FFFFFF;
+  --surface: #FAFBFC;
   --card: #FFFFFF;
-  --card-hover: #FAFAF8;
-  --border: #E2E0DC;
-  --border-subtle: #ECEAE6;
-  --text: #1A1A2E;
-  --text-secondary: #5C5C6D;
-  --text-dim: #9C9CA8;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
-  --shadow-lg: 0 8px 30px rgba(0,0,0,0.1), 0 2px 6px rgba(0,0,0,0.04);
+  --card-hover: #F4F5F7;
+  --border: #DFE1E6;
+  --border-subtle: #EBECF0;
+  --text: #172B4D;
+  --text-secondary: #42526E;
+  --text-dim: #6B778C;
+  --shadow-sm: 0 1px 2px rgba(9,30,66,0.08), 0 0 1px rgba(9,30,66,0.12);
+  --shadow-md: 0 4px 8px rgba(9,30,66,0.08), 0 0 1px rgba(9,30,66,0.16);
+  --shadow-lg: 0 8px 16px rgba(9,30,66,0.12), 0 0 1px rgba(9,30,66,0.18);
   --pill-active-text: #FFFFFF;
-  --usage-bg: #F2F1EE;
-  --grain-opacity: 0.015;
+  --usage-bg: #F4F5F7;
+  --grain-opacity: 0;
   --glow-opacity: 0;
 
-  --plan: #7C3AED;
-  --build: #D97706;
-  --test: #059669;
-  --ship: #2563EB;
-  --ops: #DC2626;
-  --security: #0891B2;
-  --integrate: #C026D3;
+  --plan: #6554C0;
+  --build: #FF8B00;
+  --test: #36B37E;
+  --ship: #0052CC;
+  --ops: #DE350B;
+  --security: #00A3BF;
+  --integrate: #FF991F;
 
-  --plan-bg: rgba(124,58,237,0.07);
-  --build-bg: rgba(217,119,6,0.07);
-  --test-bg: rgba(5,150,105,0.07);
-  --ship-bg: rgba(37,99,235,0.07);
-  --ops-bg: rgba(220,38,38,0.07);
-  --security-bg: rgba(8,145,178,0.07);
-  --integrate-bg: rgba(192,38,211,0.07);
+  --plan-bg: #EAE6FF;
+  --build-bg: #FFF0E6;
+  --test-bg: #E3FCEF;
+  --ship-bg: #DEEBFF;
+  --ops-bg: #FFEBE6;
+  --security-bg: #E6FCFF;
+  --integrate-bg: #FFFAE6;
 
   --radius: 10px;
   --font: 'Bricolage Grotesque', system-ui, sans-serif;
   --mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
-/* ── DARK THEME ── */
+/* ── DARK THEME (Atlassian Dark Tokens) ── */
 [data-theme="dark"] {
-  --bg: #0C0D11;
-  --surface: #141519;
-  --card: #1A1B21;
-  --card-hover: #1F2028;
-  --border: #2A2B33;
-  --border-subtle: #1F2028;
-  --text: #EEEAE4;
-  --text-secondary: #9B97A0;
-  --text-dim: #5E5B63;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
-  --shadow-lg: 0 8px 30px rgba(0,0,0,0.5);
-  --pill-active-text: #0C0D11;
-  --usage-bg: #0C0D11;
-  --grain-opacity: 0.025;
-  --glow-opacity: 1;
+  --bg: #1D2125;
+  --surface: #22272B;
+  --card: #282E33;
+  --card-hover: #2C333A;
+  --border: #38414A;
+  --border-subtle: #2C333A;
+  --text: #C7D1DB;
+  --text-secondary: #9FADBC;
+  --text-dim: #738496;
+  --shadow-sm: 0 1px 3px rgba(3,4,4,0.36);
+  --shadow-md: 0 4px 12px rgba(3,4,4,0.48);
+  --shadow-lg: 0 8px 24px rgba(3,4,4,0.56);
+  --pill-active-text: #1D2125;
+  --usage-bg: #1D2125;
+  --grain-opacity: 0;
+  --glow-opacity: 0;
 
-  --plan: #A78BFA;
-  --build: #FB923C;
-  --test: #34D399;
-  --ship: #60A5FA;
-  --ops: #F87171;
-  --security: #22D3EE;
-  --integrate: #F0ABFC;
+  --plan: #998DD9;
+  --build: #FFC400;
+  --test: #57D9A3;
+  --ship: #4C9AFF;
+  --ops: #FF7452;
+  --security: #79E2F2;
+  --integrate: #FFE380;
 
-  --plan-bg: rgba(167,139,250,0.1);
-  --build-bg: rgba(251,146,60,0.1);
-  --test-bg: rgba(52,211,153,0.1);
-  --ship-bg: rgba(96,165,250,0.1);
-  --ops-bg: rgba(248,113,113,0.1);
-  --security-bg: rgba(34,211,238,0.1);
-  --integrate-bg: rgba(240,171,252,0.1);
+  --plan-bg: rgba(153,141,217,0.12);
+  --build-bg: rgba(255,196,0,0.12);
+  --test-bg: rgba(87,217,163,0.12);
+  --ship-bg: rgba(76,154,255,0.12);
+  --ops-bg: rgba(255,116,82,0.12);
+  --security-bg: rgba(121,226,242,0.12);
+  --integrate-bg: rgba(255,227,128,0.12);
 }
 
 html { font-size: 15px; }
@@ -266,12 +266,12 @@ body::after {
 .search::placeholder { color: var(--text-dim); }
 
 .search:focus {
-  border-color: var(--plan);
-  box-shadow: 0 0 0 3px rgba(124,58,237,0.08);
+  border-color: var(--ship);
+  box-shadow: 0 0 0 2px rgba(0,82,204,0.2);
 }
 
 [data-theme="dark"] .search:focus {
-  box-shadow: 0 0 0 3px rgba(167,139,250,0.08);
+  box-shadow: 0 0 0 2px rgba(76,154,255,0.25);
 }
 
 .filters {
@@ -595,15 +595,6 @@ body::after {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ── FOOTER ── */
-.catalog-footer {
-  text-align: center;
-  padding: 1.5rem 1rem 0.5rem;
-  font-size: 0.7rem;
-  color: var(--text-dim);
-  letter-spacing: 0.02em;
-}
-
 /* ── RESPONSIVE ── */
 @media (max-width: 860px) {
   .header-top { flex-direction: column; align-items: flex-start; gap: 1rem; }
@@ -654,7 +645,6 @@ body::after {
     </div>
   </header>
   <main class="grid" id="grid"></main>
-  <footer class="catalog-footer">Auto-generated from agent config files. Updates on every push to main.</footer>
 </div>
 
 <script>
