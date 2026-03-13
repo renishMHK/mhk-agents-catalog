@@ -595,6 +595,15 @@ body::after {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ── FOOTER ── */
+.catalog-footer {
+  text-align: center;
+  padding: 1.5rem 1rem 0.5rem;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 860px) {
   .header-top { flex-direction: column; align-items: flex-start; gap: 1rem; }
@@ -645,6 +654,7 @@ body::after {
     </div>
   </header>
   <main class="grid" id="grid"></main>
+  <footer class="catalog-footer">Auto-generated from agent config files. Updates on every push to main.</footer>
 </div>
 
 <script>
