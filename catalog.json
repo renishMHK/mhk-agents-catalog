@@ -242,7 +242,7 @@
       "version": "1.2.0",
       "stage": "security",
       "owner": "Randy Leung",
-      "last_updated": "2026-03-10",
+      "last_updated": "2026-03-13",
       "description": "Reviews SEN tickets for RCA completeness, 5 Whys attachment, corrective action tracking, and client-facing language quality. Produces a structured pass/fail checklist report.",
       "key_features": [
         "Fetches SEN ticket data: all RCA custom fields, attachments, issue links",
@@ -262,7 +262,7 @@
       "full_name": "Site-reliability Unified Response & Guided Engineering",
       "version": "2.3.0",
       "stage": "ops",
-      "owner": "MHK Dev Team",
+      "owner": "Keith Rodgers",
       "last_updated": "2026-03-13",
       "description": "SURGE is a site reliability agent that classifies JIRA issues by type, then routes investigation across 10 domains: CloudWatch app logs (core/portal/ws/interop), Automate Scheduler job history, AWS infrastructure performance, MySQL/RDS database queries, X-Ray traces, cloud integrations (Healthwise/DataVisor/interop), VPC networking, SSO authentication, certificate management, and code context. Use when any production issue needs structured, multi-domain investigation.",
       "key_features": [
@@ -285,7 +285,7 @@
       "full_name": "Directed Intelligent System for Planning, Action, and Task Coordination in Healthcare",
       "version": "1.1.0",
       "stage": "ops",
-      "owner": "MHK Dev Team",
+      "owner": "Keith Rodgers",
       "last_updated": "2026-03-13",
       "description": "DISPATCH is an operations orchestrator that takes customer operational requests, discovers available tools and Jenkins pipelines, creates step-by-step execution plans, and guides ops engineers through each action with approval gates. Deep expertise in networking, traditional systems analysis, and infrastructure operations.",
       "key_features": [
@@ -329,7 +329,7 @@
       "full_name": "Pipeline Investigation & Problem Engine",
       "version": "1.2.0",
       "stage": "ops",
-      "owner": "MHK Dev Team",
+      "owner": "Keith Rodgers",
       "last_updated": "2026-03-13",
       "description": "PIPE debugs CI/CD pipeline failures across GitHub Actions and Jenkins. Diagnoses build failures, YAML/Groovy syntax issues, runner/agent problems, dependency resolution, and pipeline performance. Use when pipelines fail, builds break, or deployment automation stops working.",
       "key_features": [
