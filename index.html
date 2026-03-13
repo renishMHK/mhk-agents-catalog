@@ -897,10 +897,21 @@ document.getElementById('searchInput').addEventListener('input', e => {
   applyFilters();
 });
 
-// ── Init ──
-buildStats();
-buildFilters();
-renderCards(AGENTS);
+// ── Init: load from catalog.json, fall back to embedded data ──
+function init(agents) {
+  window.AGENTS_DATA = agents;
+  // Reassign so filters/search use loaded data
+  AGENTS.length = 0;
+  agents.forEach(a => AGENTS.push(a));
+  buildStats();
+  buildFilters();
+  renderCards(AGENTS);
+}
+
+fetch('catalog.json')
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(data => init(data.agents || data))
+  .catch(() => init(AGENTS));
 </script>
 </body>
 </html>

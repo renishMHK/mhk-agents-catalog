@@ -1,0 +1,349 @@
+{
+  "agents": [
+    {
+      "name": "PRISM",
+      "full_name": "Planning & Refinement with Intelligent Systems at MHK",
+      "version": "10.0.1",
+      "stage": "plan",
+      "owner": "Renish Madhukar",
+      "last_updated": "2026-03-13",
+      "description": "PRISM analyzes Jira tickets, grooms requirements, creates detailed implementation plans with code changes, and optionally generates 50-100+ comprehensive test cases. Uses SCOUT MCP for 95% faster codebase analysis (1-2 min vs 30-60 min) with adaptive RLM-based analysis and phase gate enforcement.",
+      "key_features": [
+        "Fetches and analyzes Jira ticket details with SCOUT MCP (1-2 min vs 30-60 min)",
+        "Asks clarifying questions to groom and refine requirements",
+        "Generates comprehensive implementation plans with specific code changes",
+        "Adaptive RLM-based analysis: simple/medium/complex routing",
+        "Creates detailed test cases (50-100+)",
+        "Phase gate enforcement for structured planning workflow"
+      ],
+      "usage": [
+        "/prism CPDEV-12345",
+        "plan CPDEV-12345"
+      ]
+    },
+    {
+      "name": "SLATE",
+      "full_name": "Structured Level-of-effort Assessment and Time Estimation",
+      "version": "1.0.0",
+      "stage": "plan",
+      "owner": "Narendhar Maaroju",
+      "last_updated": "2026-03-10",
+      "description": "SLATE produces AI-augmented LOE estimates in direct hours with 3-point confidence bands. Reads PRISM plan signals (P1–P7), assesses testing (Q1–Q5), code review (R1–R4), and retrofit scope (B1–B3). Replaces T-shirt sizing with a transparent, reproducible formula.",
+      "key_features": [
+        "Extracts P1–P7 signals from PRISM implementation plans",
+        "Calculates 6 explicit testing phases (JUnit, Selenium, manual, functional, regression, test data)",
+        "Code review effort formula (R1–R4) with Architecture Review support",
+        "Retrofit/backport scope (B1–B3) from Jira Fix Versions",
+        "3-point estimate: optimistic / most likely / conservative",
+        "Calibration history for team-specific tuning",
+        "Full formula transparency — shows every calculation step",
+        "Posts formatted LOE estimate to Jira"
+      ],
+      "usage": [
+        "/slate CPDEV-12345",
+        "SLATE CPDEV-12345",
+        "LOE CPDEV-12345"
+      ]
+    },
+    {
+      "name": "SCORE",
+      "full_name": "Swift Calculation of Operational Resource Effort",
+      "version": "3.0.0",
+      "stage": "plan",
+      "owner": "Renish Madhukar",
+      "last_updated": "2026-03-04",
+      "description": "SCORE estimates story points for Jira tickets using 4,100+ historical stories and the Fibonacci scale. Use when you need to estimate effort for user stories or defects.",
+      "key_features": [
+        "Analyzes ticket complexity using 4,100+ historical stories",
+        "Uses Fibonacci scale estimation (1, 2, 3, 5, 8, 13, 21)",
+        "Considers technical requirements and domain context",
+        "Provides detailed reasoning for estimates",
+        "Compares against similar historical tickets"
+      ],
+      "usage": [
+        "/score CPDEV-12345",
+        "estimate story points for CPDEV-12345"
+      ]
+    },
+    {
+      "name": "MACH",
+      "full_name": "MHK Automated Code Helper",
+      "version": "4.0.3",
+      "stage": "build",
+      "owner": "Renish Madhukar",
+      "last_updated": "2026-03-13",
+      "description": "MACH executes implementation plans created by PRISM. Fetches the plan from Jira, validates against implementation guidelines, and implements code changes step by step. Use after PRISM has created a plan.",
+      "key_features": [
+        "Fetches PRISM plans from Jira comments",
+        "Creates git backup branches before changes",
+        "Implements code changes sequentially with validation",
+        "Validates each step before proceeding",
+        "Runs tests to verify changes"
+      ],
+      "usage": [
+        "/mach CPDEV-12345",
+        "implement CPDEV-12345"
+      ]
+    },
+    {
+      "name": "QUEST",
+      "full_name": "Quality Unified Evaluation & System Testing",
+      "version": "2.0.3",
+      "stage": "test",
+      "owner": "Renish Madhukar",
+      "last_updated": "2026-03-13",
+      "description": "QUEST validates code implementations through comprehensive QA testing. Runs functional tests, validates code coverage (80% threshold), executes PRISM test plans, checks against guardrails, and generates detailed QA reports. Use after MACH implements code changes.",
+      "key_features": [
+        "Validates requirements from Jira against implementation",
+        "Runs functional tests with 80% code coverage threshold",
+        "Executes PRISM-generated test cases",
+        "Checks QA guardrails for compliance",
+        "Generates comprehensive QA reports"
+      ],
+      "usage": [
+        "/quest CPDEV-12345",
+        "run tests for CPDEV-12345"
+      ]
+    },
+    {
+      "name": "PUSH",
+      "full_name": "Pipeline Unified Submission Handler",
+      "version": "1.1.2",
+      "stage": "ship",
+      "owner": "Renish Madhukar",
+      "last_updated": "2026-03-04",
+      "description": "PUSH handles code submission after QUEST validates the implementation. Runs quality gates (lint, formatting, SonarQube), commits with Jira ID enforcement, pushes to remote, creates Pull Requests (GitHub) or Merge Requests (GitLab), and posts PR links to Jira. Use after QUEST passes tests.",
+      "key_features": [
+        "Runs quality gates (lint, formatting, SonarQube)",
+        "Creates commits with Jira ID enforcement",
+        "Pushes to remote repository",
+        "Auto-creates PR/MR with proper descriptions",
+        "Posts PR links to Jira ticket"
+      ],
+      "usage": [
+        "/push CPDEV-12345",
+        "push changes for CPDEV-12345"
+      ]
+    },
+    {
+      "name": "GUARD",
+      "full_name": "Git-Aware Unified Analysis for Review & Diffs",
+      "version": "1.0.1",
+      "stage": "test",
+      "owner": "Dasaradhi Jetti",
+      "last_updated": "2026-02-27",
+      "description": "GUARD reviews MR/PRs against Jira requirements, implementation plans, and project rules. Fetches MR/PR details from GitLab/GitHub, extracts Jira ticket context, finds or generates implementation plans via PRISM, and posts comprehensive review decisions.",
+      "key_features": [
+        "Fetches MR/PR details from GitLab/GitHub",
+        "Extracts Jira ticket context and requirements",
+        "Finds or generates implementation plans via PRISM",
+        "Compares implementation against requirements",
+        "Loads project coding standards for rule enforcement",
+        "Posts comprehensive review decisions with APPROVED/DENIED verdict"
+      ],
+      "usage": [
+        "/guard https://gitlab.com/org/repo/-/merge_requests/123",
+        "review MR 123 against CPDEV-12345"
+      ]
+    },
+    {
+      "name": "ARM",
+      "full_name": "Automated Retrofit at MHK",
+      "version": "3.0.0",
+      "stage": "build",
+      "owner": "Renish Madhukar",
+      "last_updated": "2026-03-12",
+      "description": "ARM ports code changes from the current branch to target branches based on Jira Fix Versions. Supports backporting and forward-porting with AI-assisted conflict resolution, guidelines validation, build verification, and test validation.",
+      "key_features": [
+        "Cherry-picks commits to target branches based on Jira Fix Versions",
+        "AI-assisted merge conflict resolution",
+        "Guidelines validation and build verification",
+        "Creates PRs for ported changes",
+        "Tracks porting status across branches"
+      ],
+      "usage": [
+        "/arm CPDEV-12345",
+        "retrofit CPDEV-12345"
+      ]
+    },
+    {
+      "name": "SHIELD",
+      "full_name": "Security Hardening & Intelligent Evaluation of Library Dependencies",
+      "version": "1.3.0",
+      "stage": "security",
+      "owner": "Renish Madhukar",
+      "last_updated": "2026-02-27",
+      "description": "SHIELD analyzes vulnerability reports (CSV from Wiz, etc.), enriches with CISA KEV and NVD data, identifies actively exploited CVEs, and generates remediation plans. Use when you need to analyze security vulnerabilities in Java dependencies.",
+      "key_features": [
+        "Parses CSV exports from vulnerability scanners (Wiz, Snyk, etc.)",
+        "Cross-references CVEs with CISA KEV (actively exploited)",
+        "Identifies EOL libraries and breaking changes",
+        "Generates phased remediation plans (Critical > High > Medium > Low)",
+        "Audits client Maven dependencies via GitHub and OSS Index",
+        "Validates upgrade paths against Maven Central and Spring Boot BOM",
+        "Produces Safe/Unsafe upgrade verdicts per client",
+        "Multi-branch comparison for delta analysis"
+      ],
+      "usage": [
+        "/shield analyze vulnerabilities.csv",
+        "/shield check log4j 1.2.16",
+        "/shield plan vulnerabilities.csv --java-version 11"
+      ]
+    },
+    {
+      "name": "DELTA",
+      "full_name": "Data Exploration & Learning for Trend Analysis",
+      "version": "1.0.0",
+      "stage": "integrate",
+      "owner": "Sowmya Nukala",
+      "last_updated": "2026-03-04",
+      "description": "DELTA automates the end-to-end workflow from JIRA tickets to production-ready database artifacts and analytics dashboards. AI-powered data engineering automation with 95% time reduction in STTM creation and automated QuickSight deployment.",
+      "key_features": [
+        "End-to-end data workflow: JIRA > STTM > SQL > Redshift > QuickSight",
+        "STTM (Source-to-Target Mapping) generation with 95% time reduction",
+        "SQL creation: materialized views + reporting views",
+        "Redshift deployment with validation",
+        "QuickSight dashboard, analysis, and dataset creation",
+        "Healthcare domain expertise (HIPAA, UM, Appeals, DER, FHIR)",
+        "16-step resumable workflow with Server-Sent Events progress tracking",
+        "Redshift and QuickSight MCP integration"
+      ],
+      "usage": [
+        "/delta CPDEV-12345",
+        "/delta CPDEV-12345 --resume",
+        "/delta CPDEV-12345 --sttm-only"
+      ]
+    },
+    {
+      "name": "PROBE",
+      "full_name": "Problem Resolution & Outcome-Based Evaluation",
+      "version": "1.2.0",
+      "stage": "ops",
+      "owner": "Randy Leung",
+      "last_updated": "2026-02-27",
+      "description": "PROBE performs structured Root Cause Analysis on incidents in Jira. Conducts interactive 5 Whys analysis, classifies root cause ownership (Internal/Client/Vendor/Third Party), generates corrective and preventive actions, searches for similar past incidents, and posts the RCA report back to Jira.",
+      "key_features": [
+        "Fetches Jira incident details: description, comments, linked tickets, timeline",
+        "Similar past incident search (always performed)",
+        "Interactive 5 Whys analysis: minimum 3, standard 5, maximum 8 levels",
+        "Root cause ownership classification: Internal / Client / Vendor / Third Party / Environmental",
+        "Impact assessment: duration, users affected, business impact, SLA breach",
+        "Corrective actions (fix now) and preventive actions (avoid recurrence)",
+        "RCA report posted back to Jira with guardrails validation"
+      ],
+      "usage": [
+        "/probe SEN-123",
+        "probe INC-12345"
+      ]
+    },
+    {
+      "name": "SENTINEL",
+      "full_name": "SEN Ticket Integrity & Language Evaluation",
+      "version": "1.2.0",
+      "stage": "security",
+      "owner": "Randy Leung",
+      "last_updated": "2026-03-10",
+      "description": "Reviews SEN tickets for RCA completeness, 5 Whys attachment, corrective action tracking, and client-facing language quality. Produces a structured pass/fail checklist report.",
+      "key_features": [
+        "Fetches SEN ticket data: all RCA custom fields, attachments, issue links",
+        "Reviews RCA tab completeness: verifies all required fields are populated",
+        "5 Whys attachment verification with content parsing",
+        "Corrective action review with linked ticket validation",
+        "Language quality scan for jargon, speculation, blame, and PHI",
+        "Structured pass/fail/warning checklist report"
+      ],
+      "usage": [
+        "sentinel SEN-367",
+        "/sentinel SEN-218"
+      ]
+    },
+    {
+      "name": "SURGE",
+      "full_name": "Site-reliability Unified Response & Guided Engineering",
+      "version": "2.3.0",
+      "stage": "ops",
+      "owner": "MHK Dev Team",
+      "last_updated": "2026-03-13",
+      "description": "SURGE is a site reliability agent that classifies JIRA issues by type, then routes investigation across 10 domains: CloudWatch app logs (core/portal/ws/interop), Automate Scheduler job history, AWS infrastructure performance, MySQL/RDS database queries, X-Ray traces, cloud integrations (Healthwise/DataVisor/interop), VPC networking, SSO authentication, certificate management, and code context. Use when any production issue needs structured, multi-domain investigation.",
+      "key_features": [
+        "Classifies JIRA issues by type and routes to relevant investigation domains automatically",
+        "11 dedicated investigation skills: /get-logs, /get-traces, /get-db-queries, /get-server-metrics, /get-thread-dump, /check-server-health, /check-environment-health, /check-connectivity, /mysql-connect, /get-dbprops, /get-skybot-job-history",
+        "Queries CloudWatch Logs Insights across core, portal, ws, interop, and job applications",
+        "Captures and analyzes Java thread dumps for deadlocks and contention",
+        "Verifies network connectivity and inspects AWS infrastructure routing paths",
+        "Comprehensive health checks with HEALTHY/DEGRADED/UNHEALTHY assessment",
+        "MySQL access uses user's LDAP credentials with server-level read-only enforcement (--init-command)"
+      ],
+      "usage": [
+        "/surge CPDEV-12345",
+        "/surge investigate app failure on UAT1",
+        "troubleshoot batch job failure"
+      ]
+    },
+    {
+      "name": "DISPATCH",
+      "full_name": "Directed Intelligent System for Planning, Action, and Task Coordination in Healthcare",
+      "version": "1.1.0",
+      "stage": "ops",
+      "owner": "MHK Dev Team",
+      "last_updated": "2026-03-13",
+      "description": "DISPATCH is an operations orchestrator that takes customer operational requests, discovers available tools and Jenkins pipelines, creates step-by-step execution plans, and guides ops engineers through each action with approval gates. Deep expertise in networking, traditional systems analysis, and infrastructure operations.",
+      "key_features": [
+        "Plans and executes operational tasks with step-by-step user approval gates",
+        "Hybrid capability discovery: static catalog for common ops + dynamic Jenkins job/skill search",
+        "Leverages 22 devops-skills (including 7 Jenkins pipeline skills) and 26 Jenkins MCP tools for comprehensive ops coverage",
+        "Deep networking expertise: TCP/IP, DNS, routing, firewalls, TLS, VPC, load balancers",
+        "Traditional systems analysis: process management, memory, disk I/O, kernel tuning, capacity planning",
+        "6-phase workflow: Intake → Discovery → Planning → Execution → Verification → Reporting"
+      ],
+      "usage": [
+        "/dispatch CPDEV-12345",
+        "/dispatch deploy build to UAT",
+        "/dispatch troubleshoot and fix network connectivity"
+      ]
+    },
+    {
+      "name": "atlassian-fetch",
+      "full_name": "Atlassian Data Fetch & Create Agent",
+      "version": "1.7.0",
+      "stage": "integrate",
+      "owner": "Renish Madhukar",
+      "last_updated": "2026-03-09",
+      "description": "Fetches data from Jira (tickets, search, comments) and Confluence (pages, search). Confluence create/update features coming soon. Use when you need to retrieve Atlassian content.",
+      "key_features": [
+        "Fetch Jira tickets, comments, and search results",
+        "Batch fetch multiple tickets in a single API call",
+        "Fetch Confluence pages and children",
+        "Create and update Confluence pages from markdown",
+        "Create blog posts from markdown",
+        "Search across Jira and Confluence"
+      ],
+      "usage": [
+        "/atlassian-fetch ticket CPDEV-12345",
+        "/atlassian-fetch page 12345",
+        "/atlassian-fetch search \"project = CPDEV\""
+      ]
+    },
+    {
+      "name": "PIPE",
+      "full_name": "Pipeline Investigation & Problem Engine",
+      "version": "1.2.0",
+      "stage": "ops",
+      "owner": "MHK Dev Team",
+      "last_updated": "2026-03-13",
+      "description": "PIPE debugs CI/CD pipeline failures across GitHub Actions and Jenkins. Diagnoses build failures, YAML/Groovy syntax issues, runner/agent problems, dependency resolution, and pipeline performance. Use when pipelines fail, builds break, or deployment automation stops working.",
+      "key_features": [
+        "Diagnoses GitHub Actions workflow failures with YAML validation",
+        "Troubleshoots Jenkins pipeline errors (CPS, credentials, shared libs)",
+        "Analyzes build logs to identify root cause vs cascading failures",
+        "Auto-discovers Jenkins credentials from MCP, env vars, or Claude settings",
+        "Provides fix recommendations with prevention guidance"
+      ],
+      "usage": [
+        "/pipe debug GitHub Actions failure",
+        "/pipe Jenkins build 456 failing",
+        "debug pipeline timeout"
+      ]
+    }
+  ]
+}
