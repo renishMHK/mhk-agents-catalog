@@ -344,6 +344,27 @@
         "/pipe Jenkins build 456 failing",
         "debug pipeline timeout"
       ]
+    },
+    {
+      "name": "VERIFY",
+      "full_name": "Validation Engine for Requirements and Integration of Functional tests (Enhanced)",
+      "version": "2.0.0",
+      "stage": "test",
+      "owner": "Shrigouri Subramanian",
+      "last_updated": "2026-03-13",
+      "description": "VERIFY v2.0.0 validates test cases against Jira requirements with enhanced code-level test coverage analysis. Analyzes git commits, parses unit/integration tests, runs code coverage tools, creates multi-level coverage matrix, and identifies gaps at all test levels.",
+      "key_features": [
+        "Multi-level test coverage analysis (functional, unit, integration, code coverage)",
+        "Git commit analysis to identify implementation and test files",
+        "Code coverage metrics integration (JaCoCo, pytest-cov, Istanbul)",
+        "4-type gap analysis (untested code, functional-only, missing impl, uncovered paths)",
+        "Enhanced 5-factor risk assessment with code coverage weighting",
+        "Test quality analysis (assertion depth, naming, mocking patterns)"
+      ],
+      "usage": [
+        "/verify CPDEV-12345",
+        "Review test cases with code analysis for CPDEV-12345"
+      ]
     }
   ]
 }
