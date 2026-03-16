@@ -365,6 +365,30 @@
         "/verify CPDEV-12345",
         "Review test cases with code analysis for CPDEV-12345"
       ]
+    },
+    {
+      "name": "SENTRY",
+      "full_name": "Safety & Execution eNtry Risk analYzer",
+      "version": "3.2.0",
+      "stage": "security",
+      "owner": "MHK AI Agents Team",
+      "last_updated": "2026-03-16",
+      "description": "AI-powered MySQL execution ticket safety reviewer. Validates SQL statements, checks against codebase schemas, ensures proper rollback plans, and detects dangerous operations before production execution.",
+      "key_features": [
+        "8-category SQL safety review (syntax, schema, safety gates, rollback)",
+        "Missing WHERE clause detection (prevents full-table updates)",
+        "Schema validation against HBM models (catches drift)",
+        "Rollback plan validation (ensures original values restored)",
+        "SQL syntax validation (prevents hallucination of fixes)",
+        "Large SQL attachment support (up to 5MB)",
+        "Comment-based section marker recognition",
+        "Risk assessment: LOW / MED / HIGH",
+        "Decision output: SAFE / CONDITIONAL / NOT SAFE / NOT READY"
+      ],
+      "usage": [
+        "/sentry CPSUP-37622",
+        "Review SQL safety for CPDEV-12345"
+      ]
     }
   ]
 }
