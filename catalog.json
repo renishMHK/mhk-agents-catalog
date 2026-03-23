@@ -260,17 +260,18 @@
     {
       "name": "SURGE",
       "full_name": "Site-reliability Unified Response & Guided Engineering",
-      "version": "2.3.0",
+      "version": "2.4.0",
       "stage": "ops",
       "owner": "Keith Rodgers",
-      "last_updated": "2026-03-13",
+      "last_updated": "2026-03-23",
       "description": "SURGE is a site reliability agent that classifies JIRA issues by type, then routes investigation across 10 domains: CloudWatch app logs (core/portal/ws/interop), Automate Scheduler job history, AWS infrastructure performance, MySQL/RDS database queries, X-Ray traces, cloud integrations (Healthwise/DataVisor/interop), VPC networking, SSO authentication, certificate management, and code context. Use when any production issue needs structured, multi-domain investigation.",
       "key_features": [
         "Classifies JIRA issues by type and routes to relevant investigation domains automatically",
-        "11 dedicated investigation skills: /get-logs, /get-traces, /get-db-queries, /get-server-metrics, /get-thread-dump, /check-server-health, /check-environment-health, /check-connectivity, /mysql-connect, /get-dbprops, /get-skybot-job-history",
+        "12 dedicated investigation skills: /get-logs, /get-traces, /get-db-queries, /get-server-metrics, /get-thread-dump, /check-server-health, /check-environment-health, /check-connectivity, /troubleshoot-network, /mysql-connect, /get-dbprops, /get-skybot-job-history",
         "Queries CloudWatch Logs Insights across core, portal, ws, interop, and job applications",
         "Captures and analyzes Java thread dumps for deadlocks and contention",
         "Verifies network connectivity and inspects AWS infrastructure routing paths",
+        "Deep hybrid network troubleshooting: VPN tunnels, PrivateLink, Transit Gateway, VPC peering, Direct Connect, VPC Flow Logs, MTU diagnostics",
         "Comprehensive health checks with HEALTHY/DEGRADED/UNHEALTHY assessment",
         "MySQL access uses user's LDAP credentials with server-level read-only enforcement (--init-command)"
       ],
@@ -283,10 +284,10 @@
     {
       "name": "DISPATCH",
       "full_name": "Directed Intelligent System for Planning, Action, and Task Coordination in Healthcare",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "stage": "ops",
       "owner": "Keith Rodgers",
-      "last_updated": "2026-03-13",
+      "last_updated": "2026-03-23",
       "description": "DISPATCH is an operations orchestrator that takes customer operational requests, discovers available tools and Jenkins pipelines, creates step-by-step execution plans, and guides ops engineers through each action with approval gates. Deep expertise in networking, traditional systems analysis, and infrastructure operations.",
       "key_features": [
         "Plans and executes operational tasks with step-by-step user approval gates",
@@ -327,10 +328,10 @@
     {
       "name": "PIPE",
       "full_name": "Pipeline Investigation & Problem Engine",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "stage": "ops",
       "owner": "Keith Rodgers",
-      "last_updated": "2026-03-13",
+      "last_updated": "2026-03-23",
       "description": "PIPE debugs CI/CD pipeline failures across GitHub Actions and Jenkins. Diagnoses build failures, YAML/Groovy syntax issues, runner/agent problems, dependency resolution, and pipeline performance. Use when pipelines fail, builds break, or deployment automation stops working.",
       "key_features": [
         "Diagnoses GitHub Actions workflow failures with YAML validation",
