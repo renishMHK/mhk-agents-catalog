@@ -391,13 +391,13 @@
     },
     {
       "name": "VERIFY",
-      "full_name": "Validation Engine for Requirements and Integration of Functional tests (Enhanced)",
-      "version": "2.0.0",
+      "full_name": "Validation Engine for Requirements and Integration of Functional tests (Autonomous)",
+      "version": "2.1.0",
       "stage": "test",
-      "owner": "Shrigouri Subramanian",
-      "last_updated": "2026-03-13",
+      "owner": "Shrigouri Subramanian and Claude",
+      "last_updated": "2026-03-31",
       "date_added": "2026-03-06",
-      "description": "VERIFY v2.0.0 validates test cases against Jira requirements with enhanced code-level test coverage analysis. Analyzes git commits, parses unit/integration tests, runs code coverage tools, creates multi-level coverage matrix, and identifies gaps at all test levels.",
+      "description": "VERIFY v2.1.0 - AUTONOMOUS MODE with auto-post to Jira. Zero user prompts required. Validates test cases against Jira requirements with code-level test coverage analysis. Analyzes git commits, parses unit/integration tests, runs code coverage tools, creates multi-level coverage matrix, and automatically posts comprehensive reports to Jira.",
       "key_features": [
         "Multi-level test coverage analysis (functional, unit, integration, code coverage)",
         "Git commit analysis to identify implementation and test files",
