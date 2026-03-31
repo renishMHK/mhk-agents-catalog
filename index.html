@@ -323,6 +323,102 @@ body::after {
   font-family: var(--mono);
 }
 
+/* ── SORT DROPDOWN ── */
+.sort-wrap { flex-shrink: 0; }
+
+.sort-select {
+  font-family: var(--font);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.38rem 2rem 0.38rem 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B778C' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+  background-size: 12px;
+}
+
+.sort-select:hover { border-color: var(--border); color: var(--text); }
+.sort-select:focus { border-color: var(--ship); box-shadow: 0 0 0 2px rgba(0,82,204,0.2); }
+[data-theme="dark"] .sort-select:focus { box-shadow: 0 0 0 2px rgba(76,154,255,0.25); }
+
+/* ── NAME ROW (name + badge) ── */
+.card-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ── BADGES (outlined, distinct from filled stage tags) ── */
+.badge {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.18rem 0.5rem 0.18rem 0.38rem;
+  border-radius: 10px;
+  white-space: nowrap;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: transparent;
+  border: 1.5px solid;
+  flex-shrink: 0;
+}
+
+.badge::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.badge-new {
+  background: linear-gradient(135deg, #0052CC, #6554C0);
+  color: #FFFFFF;
+  border: none;
+  box-shadow: 0 1px 4px rgba(101,84,192,0.3);
+}
+.badge-new::before {
+  background: #FFFFFF;
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+[data-theme="dark"] .badge-new {
+  background: linear-gradient(135deg, #4C9AFF, #998DD9);
+  color: #1F1F21;
+  box-shadow: 0 1px 6px rgba(76,154,255,0.3);
+}
+[data-theme="dark"] .badge-new::before { background: #1F1F21; }
+
+.badge-updated {
+  color: #006644;
+  border-color: #006644;
+}
+.badge-updated::before { background: #006644; }
+
+[data-theme="dark"] .badge-updated {
+  color: #57D9A3;
+  border-color: rgba(87,217,163,0.5);
+}
+[data-theme="dark"] .badge-updated::before { background: #57D9A3; }
+
+@keyframes badgePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
 /* ── GRID ── */
 .grid {
   display: grid;
@@ -603,6 +699,7 @@ body::after {
   .controls { flex-direction: column; align-items: stretch; }
   .search-wrap { flex: 1 1 auto; }
   .filters { justify-content: flex-start; }
+  .sort-select { width: 100%; }
   .result-count { margin-left: 0; }
   .grid { grid-template-columns: 1fr; }
   .details-grid { grid-template-columns: 1fr; }
@@ -641,6 +738,15 @@ body::after {
         <input type="text" class="search" id="searchInput" placeholder="Search agents..." autocomplete="off" spellcheck="false">
       </div>
       <div class="filters" id="filters"></div>
+      <div class="sort-wrap">
+        <select class="sort-select" id="sortSelect" aria-label="Sort agents">
+          <option value="default">Default</option>
+          <option value="added">Recently Added</option>
+          <option value="updated">Recently Updated</option>
+          <option value="name-asc">Name (A→Z)</option>
+          <option value="name-desc">Name (Z→A)</option>
+        </select>
+      </div>
       <div class="result-count" id="resultCount"></div>
     </div>
   </header>
@@ -807,7 +913,10 @@ function buildCard(agent, index) {
   }, [
     el('div', { className: 'card-head' }, [
       el('div', { className: 'card-identity' }, [
-        el('div', { className: 'card-name', textContent: agent.name }),
+        el('div', { className: 'card-name-row' }, [
+          el('div', { className: 'card-name', textContent: agent.name }),
+          ...getBadges(agent).map(b => el('span', { className: 'badge badge-' + b, textContent: b === 'new' ? 'New' : 'Updated' }))
+        ]),
         el('div', { className: 'card-fullname', textContent: agent.full_name })
       ]),
       el('div', { className: 'card-meta' }, [
@@ -853,6 +962,41 @@ function renderCards(agents) {
 // ── Interactions ──
 let activeFilter = 'all';
 let searchQuery = '';
+let currentSort = 'default';
+
+function sortAgents(agents) {
+  const sorted = [...agents];
+  switch (currentSort) {
+    case 'default':
+      sorted.sort((a, b) => (a._index || 0) - (b._index || 0));
+      break;
+    case 'added':
+      sorted.sort((a, b) => new Date(b.date_added || 0) - new Date(a.date_added || 0));
+      break;
+    case 'updated':
+      sorted.sort((a, b) => new Date(b.last_updated) - new Date(a.last_updated));
+      break;
+    case 'name-asc':
+      sorted.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+    case 'name-desc':
+      sorted.sort((a, b) => b.name.localeCompare(a.name));
+      break;
+  }
+  return sorted;
+}
+
+function getBadges(agent) {
+  const now = new Date();
+  const dateAdded = agent.date_added || agent.last_updated;
+  if (dateAdded) {
+    const added = new Date(dateAdded);
+    if (Math.floor((now - added) / 86400000) <= 14) return ['new'];
+  }
+  const updated = new Date(agent.last_updated);
+  if (Math.floor((now - updated) / 86400000) <= 14) return ['updated'];
+  return [];
+}
 
 function setFilter(stage) {
   activeFilter = stage;
@@ -875,7 +1019,7 @@ function applyFilters() {
     return matchStage && matchSearch;
   });
 
-  renderCards(filtered);
+  renderCards(sortAgents(filtered));
 
   const rc = document.getElementById('resultCount');
   rc.textContent = (q || activeFilter !== 'all')
@@ -897,15 +1041,20 @@ document.getElementById('searchInput').addEventListener('input', e => {
   applyFilters();
 });
 
+document.getElementById('sortSelect').addEventListener('change', e => {
+  currentSort = e.target.value;
+  applyFilters();
+});
+
 // ── Init: load from catalog.json, fall back to embedded data ──
 function init(agents) {
   window.AGENTS_DATA = agents;
   // Reassign so filters/search use loaded data
   AGENTS.length = 0;
-  agents.forEach(a => AGENTS.push(a));
+  agents.forEach((a, i) => { a._index = i; AGENTS.push(a); });
   buildStats();
   buildFilters();
-  renderCards(AGENTS);
+  applyFilters();
 }
 
 fetch('catalog.json')
