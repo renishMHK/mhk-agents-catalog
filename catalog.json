@@ -192,12 +192,12 @@
     },
     {
       "name": "SCOUT",
-      "full_name": "SCOUT - Codebase Intelligence MCP Server",
+      "full_name": "Structured Codebase Observer & Understanding Toolkit",
       "version": "2.1.0",
       "stage": "integrate",
       "owner": "Renish Madhukar",
       "last_updated": "2026-03-31",
-      "description": "18 core tools (single-repo) / 26 workspace tools (multi-repo) for indexed codebase exploration, Maven dependency analysis, and cross-repo intelligence. Features: auto-profiling, line-range reading, GitHub write operations, cross-repo dependency tracking, and change impact analysis.",
+      "description": "SCOUT provides indexed codebase exploration across MHK's 6 Java monorepos with auto-profiling, line-range reading, Maven dependency analysis, and cross-repo intelligence. Use when you need to search, navigate, or understand code across repositories.",
       "key_features": [
         "Auto-profiling: Search tools automatically index repos on first access (no manual setup)",
         "Line-range reading: Read specific sections of large files (avoid token limits)",
@@ -208,13 +208,9 @@
         "GitHub write operations: Create branches, edit files, open PRs without local clones"
       ],
       "usage": [
-        "search_workspace_code(query: 'UserService')",
-        "get_file(repo: 'medhok', path: 'Service.java', start_line: 1, end_line: 100)",
-        "get_file_head(repo: 'batch', path: 'Watcher.java', lines: 50)",
-        "download_file(repo: 'batch', path: 'LargeFile.java')",
-        "profile_repo(repo: 'medhok')",
-        "connect_repos()",
-        "get_change_context(entity_name: 'Member')"
+        "Search for UserService across all repos",
+        "Find all implementations of MemberService",
+        "Show what would break if I change the Member class"
       ]
     },
     {
