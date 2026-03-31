@@ -195,7 +195,7 @@
       "full_name": "SCOUT - Codebase Intelligence MCP Server",
       "version": "2.1.0",
       "stage": "integrate",
-      "owner": "MHK Dev Team",
+      "owner": "Renish Madhukar",
       "last_updated": "2026-03-31",
       "description": "18 core tools (single-repo) / 26 workspace tools (multi-repo) for indexed codebase exploration, Maven dependency analysis, and cross-repo intelligence. Features: auto-profiling, line-range reading, GitHub write operations, cross-repo dependency tracking, and change impact analysis.",
       "key_features": [
