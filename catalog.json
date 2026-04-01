@@ -395,7 +395,7 @@
       "version": "2.1.0",
       "stage": "test",
       "owner": "Shrigouri Subramanian",
-      "last_updated": "2026-03-31",
+      "last_updated": "2026-04-01",
       "date_added": "2026-03-06",
       "description": "VERIFY v2.1.0 - AUTONOMOUS MODE with auto-post to Jira. Zero user prompts required. Validates test cases against Jira requirements with code-level test coverage analysis. Analyzes git commits, parses unit/integration tests, runs code coverage tools, creates multi-level coverage matrix, and automatically posts comprehensive reports to Jira.",
       "key_features": [
