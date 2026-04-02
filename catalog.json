@@ -484,6 +484,29 @@
         "create test cases for CPDEV-12345",
         "create test cases for CPDEV-12345 in Excel format"
       ]
+    },
+    {
+      "name": "local-setup",
+      "full_name": "MedHok Local Development Setup",
+      "version": "1.1.0",
+      "stage": "build",
+      "owner": "Dasaradhi Jetti",
+      "last_updated": "2026-04-02",
+      "date_added": "2026-04-02",
+      "description": "Brings up the MedicalMgmt application locally for development. Handles branch detection, Java version, Maven build, Tomcat deployment, database tunnel verification, and GWT CodeServer setup.",
+      "key_features": [
+        "Detects Java version per branch (Java 8 vs 21, medhok-parent vs medhok-parent-java21)",
+        "Auto-detects Maven artifact name per branch and fixes webapp symlink",
+        "Verifies database tunnel (MySQL on localhost port) before starting Tomcat",
+        "Runs initial gwt:compile when oev.nocache.js is missing",
+        "Starts GWT CodeServer with correct goal per plugin version",
+        "Always uses ~/.medhok/ helper scripts (critical JVM flags for SmartGWT)"
+      ],
+      "usage": [
+        "/local-setup",
+        "/local-setup --db bsc_uat.properties",
+        "/local-setup --gwt-codeserver --branch medhok-monorepo-3.17"
+      ]
     }
   ]
 }
