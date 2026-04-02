@@ -439,10 +439,10 @@
     {
       "name": "TRACE",
       "full_name": "Test Requirements & Acceptance Criteria Engine",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "stage": "test",
       "owner": "Gerald Hoxha",
-      "last_updated": "2026-03-31",
+      "last_updated": "2026-04-01",
       "date_added": "2026-03-31",
       "description": "TRACE generates structured CSV test case files organized into three sections: Key Functional Tests (manual QA), Regression Tests (affected flows), and Unit Test Descriptions (specifications for MACH TDD). Produces RFC 4180-compliant 11-column CSV from Jira tickets and PRISM implementation plans. Unit test descriptions feed directly into MACH for guided TDD.",
       "key_features": [
