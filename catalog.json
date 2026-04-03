@@ -347,10 +347,10 @@
     {
       "name": "atlassian-fetch",
       "full_name": "Atlassian Data Fetch & Create Agent",
-      "version": "1.7.0",
+      "version": "1.8.0",
       "stage": "integrate",
       "owner": "Renish Madhukar",
-      "last_updated": "2026-03-09",
+      "last_updated": "2026-04-03",
       "date_added": "2026-01-16",
       "description": "Fetches data from Jira (tickets, search, comments) and Confluence (pages, search). Confluence create/update features coming soon. Use when you need to retrieve Atlassian content.",
       "key_features": [
@@ -439,7 +439,7 @@
     {
       "name": "TRACE",
       "full_name": "Test Requirements & Acceptance Criteria Engine",
-      "version": "2.2.0",
+      "version": "2.3.0",
       "stage": "test",
       "owner": "Gerald Hoxha",
       "last_updated": "2026-04-03",
