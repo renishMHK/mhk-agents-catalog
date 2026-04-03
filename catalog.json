@@ -439,10 +439,10 @@
     {
       "name": "TRACE",
       "full_name": "Test Requirements & Acceptance Criteria Engine",
-      "version": "2.0.0",
+      "version": "2.2.0",
       "stage": "test",
       "owner": "Gerald Hoxha",
-      "last_updated": "2026-04-01",
+      "last_updated": "2026-04-03",
       "date_added": "2026-03-31",
       "description": "TRACE generates structured CSV test case files organized into three sections: Key Functional Tests (manual QA), Regression Tests (affected flows), and Unit Test Descriptions (specifications for MACH TDD). Produces RFC 4180-compliant 11-column CSV from Jira tickets and PRISM implementation plans. Unit test descriptions feed directly into MACH for guided TDD.",
       "key_features": [
@@ -458,31 +458,6 @@
       "usage": [
         "/trace CPDEV-12345",
         "generate test cases for CPDEV-12345"
-      ]
-    },
-    {
-      "name": "TESTFORGE",
-      "full_name": "Test Engineering System Tool for Functional, Operational, Regression, and General Evaluation",
-      "version": "1.0.0",
-      "stage": "test",
-      "owner": "MedHok QA Team & Renish Madhukar (renish.madhukar@mhk.com)",
-      "last_updated": "2026-04-01",
-      "date_added": "2026-04-01",
-      "description": "TESTFORGE generates comprehensive QA test cases from Jira tickets and PRISM implementation plans with CSV/Excel export for TestRail/Xray import. Automatically analyzes ticket descriptions, comments, and PRISM plans for complete test coverage including functional, integration, negative, boundary, security, and accessibility scenarios.",
-      "key_features": [
-        "Fetches Jira tickets with full context and ALL comments analysis",
-        "Automatically uses PRISM implementation plans for technical test coverage",
-        "Three-source approach: Ticket + Comments + PRISM for complete coverage",
-        "Generates 20-30 test cases for simple features, 50-100+ for complex/regression",
-        "Supports CSV and Excel (.xlsx) export formats with proper formatting",
-        "TestRail/Xray/JIRA Zephyr compatible format",
-        "Comprehensive test types: Functional, Integration, Database, Negative, Boundary, Security, Accessibility",
-        "Optional Jira upload with summary comment"
-      ],
-      "usage": [
-        "/testforge CPDEV-12345",
-        "create test cases for CPDEV-12345",
-        "create test cases for CPDEV-12345 in Excel format"
       ]
     },
     {
