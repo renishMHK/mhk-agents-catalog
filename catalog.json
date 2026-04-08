@@ -489,6 +489,33 @@
       ]
     },
     {
+      "name": "PAVE",
+      "full_name": "Pipeline Assembly & Validation Engine",
+      "version": "1.0.0",
+      "stage": "ship",
+      "owner": "Keith Rodgers",
+      "last_updated": "2026-04-07",
+      "date_added": "2026-04-07",
+      "description": "PAVE generates compliant CI/CD pipeline configurations for MHK applications. Supports GitHub Actions (thin caller workflows using cp-github-workflow-templates) and Jenkins (centralized Jenkinsfile-terraform-deploy registration). Reads deployment standards, gathers requirements interactively, and produces ready-to-use pipeline files with full compliance built in.",
+      "key_features": [
+        "Generates compliant GitHub Actions thin caller workflows using cp-github-workflow-templates reusable workflows",
+        "Supports ECS deploy (Docker + Terraform) and Terraform-only pipeline sub-modes",
+        "Generates Jenkins pipeline registration (mapping entries for centralized Jenkinsfile-terraform-deploy)",
+        "Optional Jenkins job creation via MCP tools (create-job, create-job-from-copy)",
+        "Self-validates output against 22-check GHA compliance checklist or 8-check Jenkins checklist",
+        "Auto-detects TERRA-generated Terraform to pre-fill pipeline configuration",
+        "Enforces OIDC auth, artifact promotion, thin caller pattern, correct naming conventions",
+        "Complements TERRA (generates infra), PIPE (debugs pipelines), DISPATCH (triggers pipelines)"
+      ],
+      "usage": [
+        "/pave generate GitHub Actions for my-app",
+        "/pave generate Jenkins pipeline for my-app",
+        "/pave pipeline ECS deploy",
+        "/pave pipeline Terraform-only",
+        "/pave register Jenkins my-app"
+      ]
+    },
+    {
       "name": "local-setup",
       "full_name": "MedHok Local Development Setup",
       "version": "1.1.0",
