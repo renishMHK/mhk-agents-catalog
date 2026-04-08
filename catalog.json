@@ -461,6 +461,34 @@
       ]
     },
     {
+      "name": "TERRA",
+      "full_name": "Terraform Enterprise Resource & Runtime Assembler",
+      "version": "1.0.0",
+      "stage": "build",
+      "owner": "MHK Infrastructure Team",
+      "last_updated": "2026-04-07",
+      "date_added": "2026-04-07",
+      "description": "TERRA generates compliant Terraform modules and GitHub Actions pipeline configurations for MHK applications. Reads injected standards from the developer's repo (terraform-standards.md, networking-standards.md, build-deploy-standards.md) and produces ready-to-apply .tf files with all 14 required tags, prohibited resource guardrails, correct subnet placement, and variable validation blocks.",
+      "key_features": [
+        "Generates compliant Terraform modules from conversational requirements",
+        "Enforces all 14 mandatory tags with validation blocks by default",
+        "Blocks prohibited resources (VPC, SG, ALB, ECS cluster, ECR, Route53 CNAME)",
+        "Correct subnet placement: ECS->public, Lambda->private, RDS->data-private",
+        "Produces modular file structure (main.tf -> component modules)",
+        "Generates GitHub Actions build-and-deploy pipeline using cp-github-workflow-templates composites",
+        "Self-validates output against standards before presenting to developer",
+        "Complements infra-auditor (review) and FORGE (deploy execution)"
+      ],
+      "usage": [
+        "/terra generate ECS service",
+        "/terra scaffold Lambda + S3",
+        "/terra pipeline for my-app",
+        "/terra full stack ECS + RDS",
+        "/terra generate base VPC infrastructure",
+        "/terra base infra for MEDHOK production"
+      ]
+    },
+    {
       "name": "local-setup",
       "full_name": "MedHok Local Development Setup",
       "version": "1.1.0",
