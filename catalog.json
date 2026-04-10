@@ -137,10 +137,10 @@
     {
       "name": "GUARD",
       "full_name": "Git-Aware Unified Analysis for Review & Diffs",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "stage": "test",
       "owner": "Dasaradhi Jetti",
-      "last_updated": "2026-04-07",
+      "last_updated": "2026-04-10",
       "date_added": "2026-01-19",
       "description": "GUARD reviews MR/PRs against Jira requirements, implementation plans, and project rules. Fetches MR/PR details from GitLab/GitHub, extracts Jira ticket context, finds or generates implementation plans via PRISM, and posts comprehensive review decisions.",
       "key_features": [
