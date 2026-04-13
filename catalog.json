@@ -537,6 +537,60 @@
         "/local-setup --db bsc_uat.properties",
         "/local-setup --gwt-codeserver --branch medhok-monorepo-3.17"
       ]
+    },
+    {
+      "name": "ECHO",
+      "full_name": "Extract Channel History & Observations",
+      "version": "1.1.0",
+      "stage": "ops",
+      "owner": "Randy Leung",
+      "last_updated": "2026-04-10",
+      "date_added": "2026-04-10",
+      "description": "Microsoft Teams incident channel reader and analyzer. Uses Microsoft Graph CLI (mgc) for persistent auth or falls back to Graph Explorer bearer tokens. Discovers SEN-* incident group chats, fetches message history, and produces PROBE/VERITAS-style structured incident analysis: summary, impact, root cause, resolution, corrective actions, 5 Whys, and participant activity.",
+      "key_features": [
+        "Persistent auth via Microsoft Graph CLI (mgc): one-time device code login, auto-refreshing tokens — no manual copy/paste. Falls back to Graph Explorer bearer tokens.",
+        "Automatically discovers and filters Teams channels matching the SEN-* incident naming convention",
+        "Parses structured metadata from channel names: status (RSLVD/OPEN/ACTV/ESCL), SEN ticket, incident owner, client, related CPCLIENT ticket",
+        "Fetches paginated message history with configurable date/count range and thread reply expansion",
+        "VERITAS-style evidence mapping: every claim traced to author + timestamp; conflicting statements flagged",
+        "8-section incident analysis report: Incident Summary, Impact, Root Cause, Resolution, Corrective Actions, 5 Whys, Participant Activity, and Resolution Efficiency & Practice Recommendations",
+        "\"Not stated\" discipline — never speculates or infers beyond the channel evidence",
+        "Optional Jira context enrichment via atlassian-fetch subagent for SEN/CPCLIENT tickets",
+        "Resolution efficiency analysis: timeline breakdown, cross-functional involvement assessment, bottleneck identification, and ranked practice change recommendations to resolve faster with fewer people",
+        "Read-only — never posts to Teams; bearer token never printed in output"
+      ],
+      "usage": [
+        "/ECHO SEN-406",
+        "/ECHO analyze incident channel for HFHP",
+        "analyze Teams incident channel messages"
+      ]
+    },
+    {
+      "name": "CHAT",
+      "full_name": "Channel History Analysis Tool",
+      "version": "1.1.0",
+      "stage": "integrate",
+      "owner": "Randy Leung",
+      "last_updated": "2026-04-13",
+      "date_added": "2026-04-10",
+      "description": "General-purpose Microsoft Teams group chat reader with meeting transcript support. Authenticates via mgc CLI or Graph Explorer bearer tokens, lists group and meeting chats, fetches paginated message history or meeting transcripts (VTT), and processes content using a user-defined prompt.",
+      "key_features": [
+        "Persistent auth via Microsoft Graph CLI (mgc) with Graph Explorer bearer token fallback",
+        "Lists ALL group chats — not limited to SEN-* incident channels",
+        "Search and filter chats by name/topic keyword",
+        "Fetches paginated message history with HTML cleanup",
+        "User-defined processing: provide any prompt (summarize, extract action items, find decisions, etc.)",
+        "PHI redaction — never surfaces Protected Health Information",
+        "Read-only — never posts to Teams; bearer token never printed in output",
+        "Meeting transcript support via --transcript flag: discovers scheduled meeting chats and ad-hoc calls, fetches VTT transcripts via Graph API, parses into clean timestamped text",
+        "Bypasses Teams UI transcript save restrictions via Graph API delegated permissions (OnlineMeetings.Read, OnlineMeetingTranscript.Read.All)"
+      ],
+      "usage": [
+        "/chat",
+        "/chat summarize the DevOps standup chat",
+        "/chat extract action items from Project Alpha chat",
+        "/chat --transcript AI Sessions"
+      ]
     }
   ]
 }
