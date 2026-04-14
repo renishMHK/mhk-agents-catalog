@@ -541,10 +541,10 @@
     {
       "name": "ECHO",
       "full_name": "Extract Channel History & Observations",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "stage": "ops",
       "owner": "Randy Leung",
-      "last_updated": "2026-04-10",
+      "last_updated": "2026-04-13",
       "date_added": "2026-04-10",
       "description": "Microsoft Teams incident channel reader and analyzer. Uses Microsoft Graph CLI (mgc) for persistent auth or falls back to Graph Explorer bearer tokens. Discovers SEN-* incident group chats, fetches message history, and produces PROBE/VERITAS-style structured incident analysis: summary, impact, root cause, resolution, corrective actions, 5 Whys, and participant activity.",
       "key_features": [
