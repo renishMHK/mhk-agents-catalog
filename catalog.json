@@ -299,7 +299,7 @@
     {
       "name": "SURGE",
       "full_name": "Site-reliability Unified Response & Guided Engineering",
-      "version": "2.5.0",
+      "version": "2.6.0",
       "stage": "ops",
       "owner": "Keith Rodgers",
       "last_updated": "2026-04-16",
@@ -307,7 +307,7 @@
       "description": "SURGE is a site reliability agent that classifies JIRA issues by type, then routes investigation across 10 domains: CloudWatch app logs (core/portal/ws/interop), Automate Scheduler job history, AWS infrastructure performance, MySQL/RDS database queries, X-Ray traces, cloud integrations (Healthwise/DataVisor/interop), VPC networking, SSO authentication, certificate management, and code context. Use when any production issue needs structured, multi-domain investigation.",
       "key_features": [
         "Classifies JIRA issues by type and routes to relevant investigation domains automatically",
-        "14 dedicated investigation skills: /get-logs, /get-traces, /get-db-queries, /get-server-metrics, /get-thread-dump, /check-server-health, /check-environment-health, /check-connectivity, /troubleshoot-network, /mysql-connect, /get-dbprops, /get-skybot-job-history, /winrm, /infauto-rds-stats",
+        "15 dedicated skills: /get-logs, /get-traces, /get-db-queries, /get-server-metrics, /get-thread-dump, /check-server-health, /check-environment-health, /check-connectivity, /troubleshoot-network, /mysql-connect, /get-dbprops, /get-skybot-job-history, /winrm, /infauto-rds-stats, /cp-yaml-builder",
         "Queries CloudWatch Logs Insights across core, portal, ws, interop, and job applications",
         "Captures and analyzes Java thread dumps for deadlocks and contention",
         "Verifies network connectivity and inspects AWS infrastructure routing paths",
