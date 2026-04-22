@@ -321,7 +321,7 @@
     {
       "name": "SURGE",
       "full_name": "Site-reliability Unified Response & Guided Engineering",
-      "version": "2.7.0",
+      "version": "2.7.1",
       "stage": "ops",
       "owner": "Keith Rodgers",
       "last_updated": "2026-04-22",
