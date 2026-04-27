@@ -180,10 +180,10 @@
     {
       "name": "CARE",
       "full_name": "Commit Analysis & Retrofit Evaluation",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "stage": "build",
       "owner": "Bhushan Kable",
-      "last_updated": "2026-04-19",
+      "last_updated": "2026-04-26",
       "date_added": "2026-04-19",
       "description": "File-level commit comparison for retrofit analysis. Analyzes commits from source branch to determine if they exist in target branch using content-based comparison. Reports FOUND/PARTIAL MISSING/MISSING status with match percentages.",
       "key_features": [
@@ -192,7 +192,11 @@
         "Adaptive worker calculation (50% CPU idle, 25% busy, min 2, max 8)",
         "3 report formats: Quick CSV, Summary Markdown, All Markdown",
         "Maven project structure transformation for monorepo support",
-        "Healthcare compliance: PHI protection, audit trail, read-only access"
+        "Healthcare compliance: PHI protection, audit trail, read-only access",
+        "Default repository URL for medhok-monorepo (--repo optional)",
+        "Debug logging with care.log file (--debug flag)",
+        "Audit file generation per SHA in sha_audit_log/ folder (--audit flag)",
+        "Excel multi-tab reports as default output with Index + Source tabs (--report csv for CSV)"
       ],
       "usage": [
         "/care compare --source 3.15 --target 4.0 --mode after --after-sha abc123",
