@@ -204,6 +204,34 @@
       ]
     },
     {
+      "name": "DRIFT",
+      "full_name": "Delta Regression & Impact For Transitions",
+      "version": "1.0.0",
+      "stage": "build",
+      "owner": "Venkat Sudireddy",
+      "last_updated": "2026-05-01",
+      "date_added": "2026-05-01",
+      "description": "Browser-based commit-level missing-commit analysis between two git refs. Determines which commits are absent from a target branch, whether their code is already present in some form, and what retrofit action is required. Features SSE streaming, Excel export, cherry-pick script generation, and Jira ticket enrichment.",
+      "key_features": [
+        "Commit-ID-authoritative missing commit detection via git log newRef..oldRef",
+        "12-step analysis pipeline: fetch → resolve → diff → enrich → code presence → fuzzy re-analysis → verdict",
+        "Code presence analysis with line-level normalisation and 85% coverage threshold",
+        "Deep fuzzy re-analysis for method argument evolution and identifier token overlap",
+        "Retrofit verdict: needed / not-needed / evolved / likely-needed with work-remaining %",
+        "Dependency chain detection for sequential changes to the same file",
+        "Jira ticket enrichment (title, status, description, client) via REST API",
+        "SSE streaming for real-time progress in browser",
+        "In-memory caching with incremental re-run support (resolvedSinceLastRun badge)",
+        "Excel export with 45 columns and cherry-pick bash script generation",
+        "Supports medhok-monorepo, batch-monorepo, client-services-monorepo, bi-datamart-monorepo",
+        "Maven 3.x → 4.x path remapping (src/com/medhok → src/main/java/com/medhok)"
+      ],
+      "usage": [
+        "cd agents/12-mhk-agents/agents/drift && npm install && npm start",
+        "Open http://localhost:3848 in browser"
+      ]
+    },
+    {
       "name": "SHIELD",
       "full_name": "Security Hardening & Intelligent Evaluation of Library Dependencies",
       "version": "1.3.0",
