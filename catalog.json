@@ -281,6 +281,31 @@
       ]
     },
     {
+      "name": "skybot-mcp",
+      "full_name": "Skybot MCP Server",
+      "version": "2.0.0",
+      "stage": "ops",
+      "owner": "Vasavi Gedela",
+      "last_updated": "2026-05-01",
+      "date_added": "2026-05-01",
+      "description": "Read-only MCP for Skybot (Fortra Automate Schedule) — 21 tools, 6 schedulers, Basic Auth, read-only guardrail",
+      "key_features": [
+        "21 read-only tools across Jobs, Agents, History, Analysis, and Scheduler categories",
+        "6 schedulers: CVS/AETNA, PROD east/west, LOWER east/west, LOWER internal",
+        "Read-only enforced at gateway level — assertReadOnly() blocks write URLs before request is sent",
+        "History guardrails: 24h default window, 14-day hard cap, 200-row limit",
+        "3-state circuit breaker with 2-minute cooldown after 5 consecutive failures",
+        "Credential redaction in all error messages",
+        "Batch window analysis and cross-client comparison"
+      ],
+      "usage": [
+        "\"List all jobs on the CVS scheduler\"",
+        "\"Show job history for nightly-etl\"",
+        "\"Get running jobs on prod us-east-2\"",
+        "\"Analyze batch health for AETNA\""
+      ]
+    },
+    {
       "name": "DELTA",
       "full_name": "Data Exploration & Learning for Trend Analysis",
       "version": "1.0.0",
