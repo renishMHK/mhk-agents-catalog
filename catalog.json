@@ -50,10 +50,10 @@
     {
       "name": "SCORE",
       "full_name": "Swift Calculation of Operational Resource Effort",
-      "version": "3.0.0",
+      "version": "3.2.0",
       "stage": "plan",
       "owner": "Renish Madhukar",
-      "last_updated": "2026-03-04",
+      "last_updated": "2026-05-04",
       "date_added": "2026-01-16",
       "description": "SCORE estimates story points for Jira tickets using 4,100+ historical stories and the Fibonacci scale. Use when you need to estimate effort for user stories or defects.",
       "key_features": [
@@ -116,10 +116,10 @@
     {
       "name": "PUSH",
       "full_name": "Pipeline Unified Submission Handler",
-      "version": "1.1.4",
+      "version": "1.1.5",
       "stage": "ship",
       "owner": "Renish Madhukar",
-      "last_updated": "2026-04-07",
+      "last_updated": "2026-05-04",
       "date_added": "2026-01-16",
       "description": "PUSH handles code submission after QUEST validates the implementation. Runs quality gates (lint, formatting, SonarQube), commits with Jira ID enforcement, pushes to remote, creates Pull Requests (GitHub) or Merge Requests (GitLab), and posts PR links to Jira. Use after QUEST passes tests.",
       "key_features": [
@@ -137,10 +137,10 @@
     {
       "name": "GUARD",
       "full_name": "Git-Aware Unified Analysis for Review & Diffs",
-      "version": "1.0.4",
+      "version": "1.0.5",
       "stage": "test",
       "owner": "Dasaradhi Jetti",
-      "last_updated": "2026-04-10",
+      "last_updated": "2026-05-04",
       "date_added": "2026-01-19",
       "description": "GUARD reviews MR/PRs against Jira requirements, implementation plans, and project rules. Fetches MR/PR details from GitLab/GitHub, extracts Jira ticket context, finds or generates implementation plans via PRISM, and posts comprehensive review decisions.",
       "key_features": [
@@ -154,6 +154,31 @@
       "usage": [
         "/guard https://gitlab.com/org/repo/-/merge_requests/123",
         "review MR 123 against CPDEV-12345"
+      ]
+    },
+    {
+      "name": "COVERAGE",
+      "full_name": "Code Coverage Enhancement & Validation Agent",
+      "version": "1.0.0",
+      "stage": "test",
+      "owner": "MHK Dev Team",
+      "last_updated": "2026-05-04",
+      "date_added": "2026-05-04",
+      "description": "COVERAGE autonomously improves unit test coverage for Java/Spring modules. Analyzes existing tests, identifies gaps, creates or enhances JUnit 5 + Mockito test classes, resolves compilation errors, executes tests, and generates a detailed coverage report. Use when targeting a coverage percentage improvement on a specific module or class.",
+      "key_features": [
+        "Analyzes existing test files — reuses and enhances before creating new ones",
+        "Creates JUnit 5 + Mockito tests following existing project patterns",
+        "Resolves compilation issues automatically before running tests",
+        "Executes Maven test suite and measures JaCoCo coverage delta",
+        "Skips auto-generated files (ObjectFactory, JAXB, SOAP stubs)",
+        "Generates per-class coverage report with before/after comparison",
+        "Prioritizes highest-impact untested classes first"
+      ],
+      "usage": [
+        "/coverage <module> [ClassName] [target%]",
+        "/coverage mm-shared-services 60",
+        "/coverage mm-shared-services AutoTaskingBusinessService 60",
+        "/coverage MedicalMgmtModels 50"
       ]
     },
     {
