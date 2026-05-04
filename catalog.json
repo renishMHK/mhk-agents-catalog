@@ -406,7 +406,7 @@
       "version": "2.9.0",
       "stage": "ops",
       "owner": "Keith Rodgers",
-      "last_updated": "2026-04-23",
+      "last_updated": "2026-05-04",
       "date_added": "2026-03-02",
       "description": "SURGE is a site reliability agent that classifies JIRA issues by type, then routes investigation across 11 domains: CloudWatch app logs (core/portal/ws/interop), Automate Scheduler job history, AWS infrastructure performance, MySQL/RDS database queries, X-Ray traces, cloud integrations (Healthwise/DataVisor/interop), VPC networking, SSO authentication, certificate management, code context, and OCI infrastructure (MP/CPMP). Use when any production issue needs structured, multi-domain investigation.",
       "key_features": [
