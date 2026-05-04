@@ -518,21 +518,23 @@
     {
       "name": "TRACE",
       "full_name": "Test Requirements & Acceptance Criteria Engine",
-      "version": "2.4.0",
+      "version": "2.8.0",
       "stage": "test",
       "owner": "Gerald Hoxha",
-      "last_updated": "2026-04-10",
+      "last_updated": "2026-05-02",
       "date_added": "2026-03-31",
-      "description": "TRACE generates structured CSV test case files organized into three sections: Key Functional Tests (manual QA), Regression Tests (affected flows), and Unit Test Descriptions (specifications for MACH TDD). Produces RFC 4180-compliant 11-column CSV from Jira tickets and PRISM implementation plans. Unit test descriptions feed directly into MACH for guided TDD.",
+      "description": "TRACE generates structured CSV test case files in two sections: Unit Tests (automated, default) and Manual Tests (residual only). Enumerates all test scenarios from AC and PRISM plan first, then classifies each as unit-testable or manual — maximizing automated coverage and minimizing developer manual testing load. Automatically posts the full CSV as a Jira comment.",
       "key_features": [
         "Fetches Jira tickets and PRISM plans via Atlassian MCP",
-        "Three-section output: Key Functional Tests, Regression Tests, Unit Test Descriptions",
-        "Section A: 4-7 functional/negative/edge cases per story for manual QA",
-        "Section B: 2-4 regression tests derived from PRISM plan's modified files",
-        "Section C: 4-10 unit test specs consumed by MACH for guided TDD",
-        "Produces RFC 4180-compliant CSV with 11-column structure",
+        "Reads source files from PRISM plan to understand actual code under change",
+        "Enumerates all scenarios before assigning test type — classification-first workflow",
+        "Default-to-unit-test rule: manual only when automation is structurally impossible",
+        "Section A: Unit Tests (Automated) — specs for MACH TDD; 10-20 per story",
+        "Section B: Manual Tests — residual only; 2-6 per story (empty B is valid)",
+        "Produces RFC 4180-compliant 16-column CSV",
         "Maps every acceptance criterion to at least one test case",
-        "Enforces HIPAA-compliant test data (no real PHI/PII)"
+        "Enforces HIPAA-compliant test data (no real PHI/PII)",
+        "Automatically posts full CSV as a comment on the Jira ticket"
       ],
       "usage": [
         "/trace CPDEV-12345",
