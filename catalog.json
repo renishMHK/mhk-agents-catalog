@@ -231,10 +231,10 @@
     {
       "name": "DRIFT",
       "full_name": "Delta Regression & Impact For Transitions",
-      "version": "1.0.0",
+      "version": "1.2.0",
       "stage": "build",
       "owner": "Venkat Sudireddy",
-      "last_updated": "2026-05-01",
+      "last_updated": "2026-05-05",
       "date_added": "2026-05-01",
       "description": "Browser-based commit-level missing-commit analysis between two git refs. Determines which commits are absent from a target branch, whether their code is already present in some form, and what retrofit action is required. Features SSE streaming, Excel export, cherry-pick script generation, and Jira ticket enrichment.",
       "key_features": [
