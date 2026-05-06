@@ -205,10 +205,10 @@
     {
       "name": "CARE",
       "full_name": "Commit Analysis & Retrofit Evaluation",
-      "version": "1.1.0",
+      "version": "2.0.0",
       "stage": "build",
       "owner": "Bhushan Kable",
-      "last_updated": "2026-04-26",
+      "last_updated": "2026-05-06",
       "date_added": "2026-04-19",
       "description": "File-level commit comparison for retrofit analysis. Analyzes commits from source branch to determine if they exist in target branch using content-based comparison. Reports FOUND/PARTIAL MISSING/MISSING status with match percentages.",
       "key_features": [
