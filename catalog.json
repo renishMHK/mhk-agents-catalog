@@ -495,13 +495,13 @@
     },
     {
       "name": "VERIFY",
-      "full_name": "Validation Engine for Requirements and Integration of Functional tests (Autonomous)",
-      "version": "2.1.7",
+      "full_name": "Validation Engine for Requirements and Integration of Functional tests (Autonomous with Anti-Fabrication)",
+      "version": "2.1.7.1",
       "stage": "test",
-      "owner": "Shrigouri Subramanian",
-      "last_updated": "2026-05-04",
+      "owner": "Shrigouri Subramanian and Claude",
+      "last_updated": "2026-05-08",
       "date_added": "2026-03-06",
-      "description": "VERIFY v2.1.7 - AUTONOMOUS MODE with auto-post to Jira. Zero user prompts required. Validates test cases against Jira requirements with code-level test coverage analysis. Analyzes git commits, parses unit/integration tests, runs code coverage tools, creates multi-level coverage matrix, and automatically posts comprehensive reports to Jira using ADF (Atlassian Document Format) for professional, clean rendering with proper tables, headers, and formatting.",
+      "description": "VERIFY v2.1.7.1 - AUTONOMOUS MODE with anti-fabrication policy. Zero user prompts required. Validates test cases against Jira requirements with code-level test coverage analysis. CRITICAL: All data verified and factual - historical comparison uses real Jira queries or is omitted, defect patterns from verified bugs only. Analyzes git commits, parses unit/integration tests, runs code coverage tools, creates multi-level coverage matrix, and automatically posts comprehensive factual reports to Jira using ADF (Atlassian Document Format).",
       "key_features": [
         "Multi-level test coverage analysis (functional, unit, integration, code coverage)",
         "Git commit analysis to identify implementation and test files",
