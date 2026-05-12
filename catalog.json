@@ -697,6 +697,31 @@
         "/chat extract action items from Project Alpha chat",
         "/chat --transcript AI Sessions"
       ]
+    },
+    {
+      "name": "SWIFT",
+      "full_name": "SEN Watch & Intelligence for Flagging Tactics",
+      "version": "1.0.0",
+      "stage": "ops",
+      "owner": "Randy Leung",
+      "last_updated": "2026-05-12",
+      "date_added": "2026-05-12",
+      "description": "Scans all SEN-* Teams incident channels for 18 misuse patterns and produces scored verdicts with evidence quotes, a repeat-client heatmap, and a weekly executive report.",
+      "key_features": [
+        "18 misuse-detection patterns (P1–P18) covering false production claims, unavailability+urgency contradictions, executive bypass, boilerplate compliance language, repeat-client abuse, and more",
+        "Parallel scan of all SEN-* Teams channels via Microsoft Graph API (mgc CLI)",
+        "Scored verdicts: POTENTIAL MISUSE / WORTH REVIEWING / LIKELY LEGITIMATE with evidence quotes",
+        "Cross-SEN repeat-client heatmap identifying clients with disproportionate SEN misuse rates",
+        "Weekly executive report with trend delta vs prior week and pattern frequency table",
+        "Single-channel deep-dive mode with full scoring breakdown"
+      ],
+      "usage": [
+        "/swift              — full scan of all SEN channels, complete verdict report",
+        "/swift --weekly     — scan new/updated channels since last run, executive report with trend delta",
+        "/swift SEN-506      — deep-dive a single named channel with full evidence breakdown",
+        "/swift --report     — regenerate last executive report from cached results (no re-scan)",
+        "/swift --patterns   — print the P1–P18 pattern library with descriptions and weights"
+      ]
     }
   ]
 }
