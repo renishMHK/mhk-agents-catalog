@@ -381,23 +381,26 @@
     {
       "name": "SENTINEL",
       "full_name": "SEN Ticket Integrity & Language Evaluation",
-      "version": "1.2.0",
+      "version": "1.4.0",
       "stage": "security",
       "owner": "Randy Leung",
-      "last_updated": "2026-03-13",
+      "last_updated": "2026-05-13",
       "date_added": "2026-02-26",
-      "description": "Reviews SEN tickets for RCA completeness, 5 Whys attachment, corrective action tracking, and client-facing language quality. Produces a structured pass/fail checklist report.",
+      "description": "Reviews SEN tickets for RCA completeness, 5 Whys attachment, corrective action tracking, and client-facing language quality. Produces a structured pass/fail checklist report. Supports --with-echo flag to cross-reference Teams incident channel evidence via the ECHO agent.",
       "key_features": [
         "Fetches SEN ticket data: all RCA custom fields, attachments, issue links",
         "Reviews RCA tab completeness: verifies all required fields are populated",
+        "CA format validation against SEN-521 approved standard (CORRECTIVE ACTION N structure)",
         "5 Whys attachment verification with content parsing",
         "Corrective action review with linked ticket validation",
         "Language quality scan for jargon, speculation, blame, and PHI",
-        "Structured pass/fail/warning checklist report"
+        "Structured pass/fail/warning checklist report",
+        "Optional --with-echo flag: cross-references Teams incident channel via ECHO agent to surface missing Jira field content"
       ],
       "usage": [
         "sentinel SEN-367",
-        "/sentinel SEN-218"
+        "/sentinel SEN-218",
+        "/sentinel SEN-530 --with-echo"
       ]
     },
     {
