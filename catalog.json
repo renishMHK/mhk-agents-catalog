@@ -725,6 +725,28 @@
         "/swift --report     — regenerate last executive report from cached results (no re-scan)",
         "/swift --patterns   — print the P1–P18 pattern library with descriptions and weights"
       ]
+    },
+    {
+      "name": "oneshotit",
+      "full_name": "OneShotIt — OneShot Jira Ticket Creator",
+      "version": "1.0.0",
+      "stage": "integrate",
+      "owner": "Renish Madhukar",
+      "last_updated": "2026-05-27",
+      "date_added": "2026-05-27",
+      "description": "Converts an informal task description into a fully-formatted OneShot Jira ticket (PFOS label, structured sections) and creates it. Supports Standard (Story / Task / Bug) and Retrofit ticket flavors. Always interactive; requires explicit approval before posting.",
+      "key_features": [
+        "Walks the user through every OneShot ticket section interactively",
+        "Auto-applies the required PFOS label (script enforces it as defense-in-depth)",
+        "Supports both Standard (Story / Task / Bug) and Retrofit flavors",
+        "Renders a markdown preview before posting; requires explicit approval",
+        "Defaults to CPDEV project, overridable via --project flag"
+      ],
+      "usage": [
+        "/oneshotit <free-form task description>",
+        "/oneshotit retrofit <free-form description>",
+        "/oneshotit --project CPNEXT <description>"
+      ]
     }
   ]
 }
