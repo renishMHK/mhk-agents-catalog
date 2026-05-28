@@ -727,12 +727,12 @@
       ]
     },
     {
-      "name": "oneshotit",
-      "full_name": "OneShotIt — OneShot Jira Ticket Creator",
-      "version": "1.0.0",
+      "name": "OneShotIt",
+      "full_name": "OneShot Jira Ticket Creator",
+      "version": "1.0.1",
       "stage": "integrate",
       "owner": "Renish Madhukar",
-      "last_updated": "2026-05-27",
+      "last_updated": "2026-05-28",
       "date_added": "2026-05-27",
       "description": "Converts an informal task description into a fully-formatted OneShot Jira ticket (PFOS label, structured sections) and creates it. Supports Standard (Story / Task / Bug) and Retrofit ticket flavors. Always interactive; requires explicit approval before posting.",
       "key_features": [
