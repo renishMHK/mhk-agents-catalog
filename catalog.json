@@ -429,6 +429,41 @@
       ]
     },
     {
+      "name": "PULSE",
+      "full_name": "Periodic Unified Log & Schedule Evaluator",
+      "version": "2.0.0",
+      "stage": "ops",
+      "owner": "vsudireddy",
+      "last_updated": "2026-06-04",
+      "date_added": "2026-06-04",
+      "description": "Two-mode agent. AUDIT mode: cross-environment Skybot job-health auditor (reads RDS + CloudWatch, classifies OK/WARN/FAIL, supports compare). UPGRADE mode: full upgrade-readiness audit covering (1) Skybot job comparison source vs target env, (2) deep RCA on failing jobs via SURGE skill (SSH + repos + CloudWatch), (3) AWS service inventory cross-referenced with Lambda/config repos. Verify-only credential bootstrap, auto-clones missing repos.",
+      "key_features": [
+        "Two modes: AUDIT (job-health) and UPGRADE (upgrade-readiness audit) — backward compatible with v1.0.0",
+        "Reusable across all MHK clients/environments — no hardcoded client name",
+        "AUDIT — single-env health or side-by-side multi-env comparison",
+        "UPGRADE Req#1 — Skybot job comparison source vs target env, drift detection, add/remove recommendations",
+        "UPGRADE Req#2 — Source-of-truth job list with deep RCA on failing jobs via SURGE skill (SSH to batch host, repo cross-reference, CloudWatch deep-dive)",
+        "UPGRADE Req#3 — AWS service inventory (EC2, Lambda, SQS/SNS, ECS, API Gateway, CloudWatch alarms, EventBridge, S3, Secrets Manager, Route53) cross-referenced with cp-medhok20-lambda-{python-,}monorepo + cp-configurations-master to identify client-specific code",
+        "UPGRADE intake supports multi-select: skip any of the 3 requirements as needed",
+        "Inline SURGE skill invocation — no subagent overhead; PULSE and SURGE share session context",
+        "Verify-only credential bootstrap — fails fast with one-line fix recipes; never prompts for credentials mid-run",
+        "Auto-clones missing repos via gh (cp-product-client-configs, cp-batch-monorepo, cp-product-scheduler-times, cp-medhok-data-extract-monorepo, cp-medhok20-lambda-{python-,}monorepo, cp-configurations-master)",
+        "Reads job definitions from infauto_batchjob.skybot_job (read-only enforced via SET SESSION TRANSACTION READ ONLY)",
+        "Replays last N-h run window from /skybot/scheduler/joblogs (CloudWatch Logs Insights)",
+        "Classifies each job as OK / WARN / FAIL / IDLE / NO_DATA with extracted remarks",
+        "Optional Jira posting when a ticket ID is supplied (mcp__atlassian__addCommentToJiraIssue inline)"
+      ],
+      "usage": [
+        "/pulse",
+        "pulse ALTERWOOD UAT1",
+        "pulse compare ALTERWOOD UAT1 STAGE1",
+        "pulse upgrade ALTERWOOD UAT1 PROD1",
+        "pulse upgrade BCBSNC UAT1 PROD1 --post CPDEV-12345",
+        "pulse upgrade ALTERWOOD UAT1 PROD1 --only req1,req3   # skip RCA",
+        "pulse BCBSMA PROD1 --window 48h --post CPDEV-12345"
+      ]
+    },
+    {
       "name": "DISPATCH",
       "full_name": "Directed Intelligent System for Planning, Action, and Task Coordination in Healthcare",
       "version": "1.2.0",
