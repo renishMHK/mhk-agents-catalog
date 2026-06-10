@@ -782,6 +782,28 @@
         "/oneshotit retrofit <free-form description>",
         "/oneshotit --project CPNEXT <description>"
       ]
+    },
+    {
+      "name": "operations-analyze-jsm-ticket",
+      "full_name": "Operations JSM Ticket Analyzer",
+      "version": "1.0.0",
+      "stage": "ops",
+      "owner": "Analisse Castillo",
+      "last_updated": "2026-06-10",
+      "date_added": "2026-06-10",
+      "description": "Analyzes CPSUP JSM tickets by fetching ticket details, finding 5 related resolved tickets, searching Confluence SOPs, and suggesting scripts from itops-oneoff. Ends with a /surge handoff for live troubleshooting.",
+      "key_features": [
+        "Fetches CPSUP JSM ticket details from Jira",
+        "Finds 5 most recent related resolved tickets with troubleshooting history",
+        "Searches Confluence for relevant SOPs and runbooks",
+        "Suggests scripts from mhk-repos/itops-oneoff GitHub repository",
+        "Provides AI-powered root cause and next-step recommendations",
+        "Hands off to /surge for live system investigation"
+      ],
+      "usage": [
+        "/operations-analyze-jsm-ticket CPSUP-50081",
+        "analyze ticket CPSUP-12345"
+      ]
     }
   ]
 }
