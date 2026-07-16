@@ -784,6 +784,28 @@
       ]
     },
     {
+      "name": "PF-Report",
+      "full_name": "Product Factory Issue Reporter",
+      "version": "1.0.0",
+      "stage": "integrate",
+      "owner": "Renish Madhukar",
+      "last_updated": "2026-07-16",
+      "date_added": "2026-07-16",
+      "description": "Captures a free-form report about a Product Factory tool (OneShot or Spec Factory), searches the correct tracking epic for duplicates first, auto-detects the issue type from the description, renders a preview, and creates the report as a child of the correct epic in OneShot format after explicit approval. Does not apply the PFOS label, so reports are not auto-implemented.",
+      "key_features": [
+        "Routes reports to the correct tracking epic (OneShot → CPDEV-23232, Spec Factory → CPDEV-26040)",
+        "Searches the epic for likely duplicates before creating, and lets the user comment / create-anyway / cancel",
+        "Auto-detects the issue type (Bug / Task / Story) from the description and confirms with the user",
+        "Renders a OneShot-format markdown preview and requires explicit approval before posting",
+        "Files the report as a child of the epic without the PFOS label, so it is not auto-implemented"
+      ],
+      "usage": [
+        "/pf-report <free-form description of the Product Factory issue>",
+        "/pf-report OneShot <description>",
+        "/pf-report Spec Factory <description>"
+      ]
+    },
+    {
       "name": "operations-analyze-jsm-ticket",
       "full_name": "Operations JSM Ticket Analyzer",
       "version": "1.0.0",
