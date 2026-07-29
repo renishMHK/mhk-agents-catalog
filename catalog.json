@@ -205,27 +205,38 @@
     {
       "name": "CARE",
       "full_name": "Commit Analysis & Retrofit Evaluation",
-      "version": "2.0.0",
+      "version": "2.9.0",
       "stage": "build",
       "owner": "Bhushan Kable",
-      "last_updated": "2026-05-06",
+      "last_updated": "2026-07-29",
       "date_added": "2026-04-19",
       "description": "File-level commit comparison for retrofit analysis. Analyzes commits from source branch to determine if they exist in target branch using content-based comparison. Reports FOUND/PARTIAL MISSING/MISSING status with match percentages.",
       "key_features": [
-        "6 commit selection modes: single, list, after, daterange, ticket, all",
-        "Content-based comparison with 100% strict matching for FOUND status",
-        "Adaptive worker calculation (50% CPU idle, 25% busy, min 2, max 8)",
-        "3 report formats: Quick CSV, Summary Markdown, All Markdown",
-        "Maven project structure transformation for monorepo support",
-        "Healthcare compliance: PHI protection, audit trail, read-only access",
+        "care audit: flagship command — identifies every retrofit gap between two branches, grouped by Jira customer, defaulting to all customers",
+        "care audit --hotfix-pattern folds unmerged hotfix-branch commits into the same audit, closing a blind spot no two-branch scan can see on its own",
+        "--llm-review (opt-in): Claude via AWS Bedrock investigates ambiguous MISSING verdicts (diverged/never-ported files) the git heuristics can't resolve confidently",
+        "care audit --reconcile (opt-in): cross-checks Jira for tickets resolved with no matching commit in the scanned range, surfacing fixes in other repos or never committed as a manual-triage list",
+        "Automatic retry-with-backoff on transient Jira failures (5xx/429/404), plus care audit --resume-from to recover completed git analysis after a Jira/report-phase failure without re-cloning or re-analyzing",
+        "Automatic High/Medium/Low Priority labeling on every commit and reconciliation ticket, plus an Action Items view (Excel tab / CSV block / Markdown section) listing only High-priority items across all customers",
+        "8 commit selection modes: single, list, after, daterange, ticket, ticket-list, all, diverge",
+        "Jira-driven ticket discovery (care discover-tickets) by Customer field, not free-text search",
+        "Hotfix-branch discovery (care discover-hotfixes) surfaces fixes stranded on unmerged branches",
+        "Has Ticket report column flags commits with no ticket reference for manual triage",
+        "Git cherry patch-id matching for commit equivalence detection",
+        "Revert / squash / partial-port / symbol detection surfaced in report output",
+        "Healthcare compliance: PHI protection, audit trail, read-only access, strict scope enforcement",
         "Default repository URL for medhok-monorepo (--repo optional)",
         "Debug logging with care.log file (--debug flag)",
-        "Audit file generation per SHA in sha_audit_log/ folder (--audit flag)",
         "Excel multi-tab reports as default output with Index + Source tabs (--report csv for CSV)"
       ],
       "usage": [
+        "care audit --source medhok-monorepo-3.18 --target medhok-monorepo-4.1 --report all",
+        "care audit --source medhok-monorepo-3.18 --target medhok-monorepo-4.1 --customer \"CVS CP\"",
+        "care audit --source medhok-monorepo-3.18 --target medhok-monorepo-4.1 --hotfix-pattern \"*cvs-hotfix*\"",
+        "care audit --source medhok-monorepo-3.18 --target medhok-monorepo-4.1 --customer \"CVS CP\" --reconcile",
         "/care compare --source 3.15 --target 4.0 --mode after --after-sha abc123",
-        "care compare --repo <url> --source <branch> --target <branch> --mode daterange --start 2025-01-01 --end 2025-12-31"
+        "care discover-tickets --customer \"CVS CP\" --project CPDEV --output tickets.txt",
+        "care discover-hotfixes --base medhok-monorepo-3.18 --pattern \"*cvs-hotfix*\""
       ]
     },
     {
