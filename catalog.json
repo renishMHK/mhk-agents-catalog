@@ -673,18 +673,21 @@
     {
       "name": "local-setup",
       "full_name": "MedHok Local Development Setup",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "stage": "build",
       "owner": "Dasaradhi Jetti",
-      "last_updated": "2026-04-02",
+      "last_updated": "2026-08-20",
       "date_added": "2026-04-02",
       "description": "Brings up the MedicalMgmt application locally for development. Handles branch detection, Java version, Maven build, Tomcat deployment, database tunnel verification, and GWT CodeServer setup.",
       "key_features": [
         "Detects Java version per branch (Java 8 vs 21, medhok-parent vs medhok-parent-java21)",
         "Auto-detects Maven artifact name per branch and fixes webapp symlink",
         "Verifies database tunnel (MySQL on localhost port) before starting Tomcat",
+        "Protects client databases from local schema or data mutations",
         "Runs initial gwt:compile when oev.nocache.js is missing",
+        "Uses the standard OEVDev fast-compile arguments for one-permutation local GWT builds",
         "Starts GWT CodeServer with correct goal per plugin version",
+        "Documents the known-working local CAS recovery pattern",
         "Always uses ~/.medhok/ helper scripts (critical JVM flags for SmartGWT)"
       ],
       "usage": [
