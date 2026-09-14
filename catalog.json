@@ -440,6 +440,31 @@
       ]
     },
     {
+      "name": "SCOPE",
+      "full_name": "Scheduler Check and Operational Performance Evaluator",
+      "version": "1.6.10",
+      "stage": "ops",
+      "owner": "Tara Jaikaeo",
+      "last_updated": "2026-09-14",
+      "date_added": "2026-09-14",
+      "description": "Read-only Skybot health auditor. Given an agent name or agent group, proves executable-job membership, retrieves exact scheduler-run logs, uses bounded CloudWatch correlation, and collects approved client-server log evidence.",
+      "key_features": [
+        "Builds an environment-bounded executable-job inventory from Skybot Where Used and read-only Automation RDS evidence",
+        "Correlates each job with its exact latest Skybot run and exact scheduler log",
+        "Separates scheduler, runner, and application evidence and prevents success claims from scheduler completion alone",
+        "Escalates only observed client paths for bounded, read-only surge-skill inspection via ssh-connect",
+        "Reports evidence-based migration and configuration recommendations without changing scheduler or client state",
+        "Verifies scheduler definitions and effective YAML/default settings when supplied",
+        "Resolves the correct Skybot URL from current scheduler documentation instead of assuming LOWER us-east-2",
+        "Analyzes legacy commands_json shell wrappers for JAR, Java version, JVM options, configuration files, and forwarded arguments"
+      ],
+      "usage": [
+        "scope agent HPICPINT1 --client ExampleClient --envid UAT1 --target-version 4.1 --window 24h",
+        "scope group cp_cte_bww_cu --client ExampleClient --envid UAT1 --target-version 4.1 --window 24h",
+        "Check all UAT1 jobs for HPICPINT1 and summarize failures"
+      ]
+    },
+    {
       "name": "PULSE",
       "full_name": "Periodic Unified Log & Schedule Evaluator",
       "version": "2.0.0",
