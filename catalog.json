@@ -846,6 +846,27 @@
       ]
     },
     {
+      "name": "OneShot-Skill-Builder",
+      "full_name": "OneShot Repository Skill Builder",
+      "version": "1.0.0",
+      "stage": "integrate",
+      "owner": "MHK Dev Team",
+      "last_updated": "2026-10-01",
+      "date_added": "2026-10-01",
+      "description": "Builds, extends, and validates OneShot repository skills (.oneshot/skills: manifest.json, grounding and topical SKILL.md files, selection fixtures) grounded in a team's actual code, then runs a bundled validator that mirrors the OneShot loader until it passes.",
+      "key_features": [
+        "Scaffolds a v2 manifest, grounding skill, topical skills, and fixtures from bundled templates",
+        "Grounds every skill fact in a command run against the team's repo",
+        "Bundled dependency-free validator mirrors the OneShot loader: strict front matter, path safety, Git blob modes, size limits",
+        "Replays selection against fixtures per stage and processing mode, including near-miss cases",
+        "Loader contract and authoring guide referenced from the OneShot platform source"
+      ],
+      "usage": [
+        "Ask to create, extend, review, or debug OneShot repository skills in a target repo",
+        "python3 .oneshot/skills/validate_skills.py --repo-root <repo>"
+      ]
+    },
+    {
       "name": "operations-analyze-jsm-ticket",
       "full_name": "Operations JSM Ticket Analyzer",
       "version": "1.0.0",
