@@ -442,10 +442,10 @@
     {
       "name": "SCOPE",
       "full_name": "Scheduler Check and Operational Performance Evaluator",
-      "version": "1.6.10",
+      "version": "1.6.11",
       "stage": "ops",
       "owner": "Tara Jaikaeo",
-      "last_updated": "2026-09-21",
+      "last_updated": "2026-10-16",
       "date_added": "2026-09-14",
       "description": "Read-only Skybot health auditor. Given an agent name or agent group, proves executable-job membership, retrieves exact scheduler-run logs, uses bounded CloudWatch correlation, and collects approved client-server log evidence.",
       "key_features": [
